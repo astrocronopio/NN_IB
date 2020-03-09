@@ -1,0 +1,76 @@
+\input{Preamble.sty}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Título%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Práctica 2}
+\author{Evelyn~G.~Coronel}
+
+\affiliation{
+Redes~Neuronales - Instituto~Balseiro\\}
+
+\date[]{\lowercase{\today}} %%lw para lw, [] sin date
+
+\begin{abstract}
+Soluciones a los ejercicios de la práctica 2 de la materia de Redes neuronales. Esta práctica es acerca de la interacción entre neuronas.
+\end{abstract} 
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Podemos usar cualquiera de los dos comandos: \input o \include para incluir el texto
+%\input{./Capitulo1/cap1.tex}
+
+
+\section{Ejercicio 1}
+
+Las dos poblaciones de neuronas están descritas por las siguientes ecuaciones:
+\begin{align}
+    \tau \nicefrac{df_e}{dt} &= -f_e + g_{ee} f_e\Theta(f_e) - g_{ei}f_i\Theta(f_i) + I_e\\
+    \tau \nicefrac{df_i}{dt} &= -f_i + g_{ie} f_e\Theta(f_e) - g_{ii}f_i\Theta(f_i) + I_i
+\end{align}
+donde $f_i$ y $f_e$ son las tasas de disparo, $g_{ee}$ y $g_{ii}$ son las conductancias asociadas a la autointeracción de la neuronas y los términos $g_{ie}$ y $g_{ei}$ son las conductancias de la interacción entre las neuronas.
+
+Sabemos que la solución es estable cuando las derivadas se anulan
+\begin{align}
+    0= -f_e + g_{ee} f_e\Theta(f_e) - g_{ei}f_i\Theta(f_i) + I_e\\
+    0= -f_i + g_{ie} f_e\Theta(f_e) - g_{ii}f_i\Theta(f_i) + I_i
+\end{align}
+
+Considerando que las tasas de disparo y las conductancias son positivas,  las condiciones de estabilidad quedan como
+\begin{align}
+     (1 -g_{ee}) f_e &= -g_{ei}f_i + I_e \label{fe}\\
+    (1 + g_{ii}) f_i &=  g_{ie} f_e  + I_i
+\end{align}
+
+En cambio para la tasa $f_e$ dependiendo del valor de la conductancias puede tomar un valor negativo; por hipótesis asumimos que $f_e \ge 0$, esto implica que la actividad o la cantidad de spikes es nula.
+
+Considerando la Ec.\,\ref{fe}, se obtiene una relación entre $f_e$ y $f_i$,
+\begin{align}
+	     f_e &=\frac{-g_{ei}f_i + I_e}{1 -g_{ee}}\\
+	     0 &\le \frac{-g_{ei}f_i + I_e}{1 -g_{ee}}
+\end{align}
+
+Buscamos las condiciones para las cuales $f_e>=0$. Para esto se deben cumplir simultáneamente las ciertas condiciones en el denominador y numerador.
+
+\begin{itemize}
+	\item Si $1 > g_{ee}$ entonces  $I_e > g_{ei}f_i$.
+	\item Si $1 < g_{ee}$ entonces  $I_e < g_{ei}f_i$.
+\end{itemize}
+
+Ya que simplificando el problema.
+\subsection{Simulaciones}
+
+
+
+\section{Ejercicio 2}
+
+
+Implementamos la siguiente corriente
+
+\begin{equation}
+	I(t) = I_0 + I_{syn}(t)
+\end{equation}
+
+
+
+\end{document}
