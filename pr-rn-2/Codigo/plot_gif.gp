@@ -1,5 +1,5 @@
 set terminal gif animate delay 3 size 1000,900  enhanced font 'Verdana,26'
-set output 'current_11.gif'
+set output '../Graficos/current_11.gif'
 
 neuron1='./ejercicio_2_1_current_11.txt'
 neuron2='./ejercicio_2_2_current_11.txt'

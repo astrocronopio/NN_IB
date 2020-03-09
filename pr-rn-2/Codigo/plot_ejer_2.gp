@@ -1,6 +1,6 @@
 set term png 1 size 1200,800 enhanced font 'Verdana,26'
 
-set output "current_11.png"
+set output "../Graficos/current_11.png"
 
 file_current="./freq_current_ej_2_current_11.txt"
 

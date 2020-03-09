@@ -145,7 +145,7 @@ void Ejercicio2()
 	ofstream myfile1 ("ejercicio_2_1_current_11.txt");
 	ofstream myfile2 ("ejercicio_2_2_current_11.txt");
 	
-	ofstream freq_Current("freq_current_ej_2_current_11.txt");
+	ofstream freq_Current("gsyn_T_desfase_ej_2_current_11.txt");
 
 	for (int i = 0; i < n_i; ++i)
 	{	

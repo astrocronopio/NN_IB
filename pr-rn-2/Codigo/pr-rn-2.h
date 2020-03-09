@@ -3,7 +3,7 @@
 #include <math.h>
 #include <string>
 #include <sstream>
-#include "../pr-rn-1/pr-rn-1.h"
+#include "../../pr-rn-1/Codigo/pr-rn-1.h"
 
 
 using namespace std;
