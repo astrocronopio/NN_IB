@@ -1,0 +1,111 @@
+\input{Preamble.sty}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Título%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Práctica 2: Dinámica de sistemas acoplados }
+\author{Evelyn~G.~Coronel}
+
+\affiliation{
+Redes~Neuronales - Instituto~Balseiro\\}
+
+\date[]{\lowercase{\today}} %%lw para lw, [] sin date
+
+\begin{abstract}
+Soluciones a los ejercicios de la práctica 2 de la materia de Redes Neuronales. En esta práctica se describe  la interacción entre neuronas como sistemas dinámicos acoplados.
+\end{abstract} 
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Podemos usar cualquiera de los dos comandos: \input o \include para incluir el texto
+%\input{./Capitulo1/cap1.tex}
+
+
+\section*{Ejercicio 1}
+
+Las dos poblaciones de neuronas están descritas por las siguientes ecuaciones:
+\begin{align}
+    \tau \nicefrac{df_e}{dt} &= -f_e + g_{ee} f_e\Theta(f_e) - g_{ei}f_i\Theta(f_i) + I_e\\
+    \tau \nicefrac{df_i}{dt} &= -f_i + g_{ie} f_e\Theta(f_e) - g_{ii}f_i\Theta(f_i) + I_i
+\end{align}
+donde $f_i$ y $f_e$ son las tasas de disparo, $g_{ee}$ y $g_{ii}$ son las conductancias asociadas a la auto-interacción de la neuronas y los términos $g_{ie}$ y $g_{ei}$ son las conductancias de la interacción entre las neuronas.
+
+Sabemos que la solución es estable cuando las derivadas se anulan
+\begin{align}
+    0= -f_e + g_{ee} f_e\Theta(f_e) - g_{ei}f_i\Theta(f_i) + I_e\\
+    0= -f_i + g_{ie} f_e\Theta(f_e) - g_{ii}f_i\Theta(f_i) + I_i
+\end{align}
+
+Considerando que las tasas de disparo $f_e$ y $f_i$ son positivas, donde $0$ implicaría la ausencia de spikes, y las conductancias  son mayores o iguales a 0,  las condiciones de estabilidad quedan como
+\begin{align}
+     (1 -g_{ee}) f_e &= -g_{ei}f_i + I_e \label{fe}\\
+    (1 + g_{ii}) f_i &=  g_{ie} f_e  + I_i
+\end{align}
+
+Por lo que finalmente llegamos a un sistema de ecuaciones lineales para las tasas. Resolviendo este sistema, las tasas son iguales a 
+%En cambio para la tasa $f_e$ dependiendo del valor de la conductancias puede tomar un valor negativo; por hipótesis asumimos que $f_e \ge 0$, esto implica que la actividad o la cantidad de spikes es nula.
+\begin{align}
+     f_i = \frac{g_{ie}I_e + I_iA}{g_{ei}g_{ie}+ AB}\\
+     f_i = \frac{g_{ei}I_i + I_eB}{g_{ei}g_{ie}+ AB} 
+\end{align}
+donde $A= 1 - g_{ee}$ y $B=1+g_{ii}$. Como buscamos que las tasas sean positivas, implica que 
+
+\begin{align}
+     \frac{g_{ie}I_e + I_i -g_{ee}I_i }{1+g_{ei}g_{ie} - g_{ii}g_{ee} -g_{ee}-g_{ii}} > 0\\
+     \frac{g_{ei}I_i + I_e +g_{ii}I_e }{1+g_{ei}g_{ie} - g_{ii}g_{ee} -g_{ee}-g_{ii}} > 0 
+\end{align}
+
+
+\section*{Ejercicio 2}
+
+\subsection{Introducción}
+
+Las neuronas del tipo Hogdkin-Huxley se basan las ecuaciones presentadas en \cite{HH}. En este trabajo, se agrega un parámetro más, $s$, que corresponde a la función inhibitoria \cite{syn}, usado para modelar la inhibición sináptica. Este parámetro es descrito mediante la siguiente ecuación diferencial,
+\begin{align}
+    \frac{ds}{dt}&= \frac{s_\infty(V) - s}{\tau}\\
+    s_\infty(V)&= 0.5(1+tanh(\nicefrac{V}{5})),
+\end{align}
+donde $V$ es el potencial de  la neurona y $\tau$ es el tiempo característico asociado a la inhibición. En este trabajo se considera  $\tau = 3\,$ms.
+
+Para estudiar la interacción entre dos neuronas de Hogdkin-Huxley, consideramos que están conectadas simétricamente, es decir, la corriente $I(t)$ para ambas tiene la siguiente forma
+\begin{align}
+    I(t)            &= I_0 + I_{syn}(t)\\
+    I_{syn}(t)      &= -g_{syn}s(t)(V-V_{syn}),
+\end{align}
+donde la corriente $I_0$ debe ser un valor tal que para las dos neuronas produzcan spikes periódicamente, $s(t)$ es el parámetro descrito anteriormente, $g_{syn}$ es la conductancia asociada con la entrada sináptica y $V_{syn}$ es el potencial sináptico.
+
+\subsection{Simulaciones}
+
+En esta sección se varía el parámetro $g_{syn}$ entre $0$ y 2 ${\text{mS}}/{\text{cm}^2}$ con $\Delta g_{syn}=0.02\,{\text{mS}}/{\text{cm}^2}$ para 100 iteraciones. En cada interación se mantiene fijo un valor para $V_{syn}$. La simulación utiliza un variación de tiempo de $\Delta t 0.1\,$ms y realizan $2000$ interaciones, para un total de 200\,ms.
+
+    \subsubsection{Caso $V_{syn}= 0\,\text{mV}$ con una corriente $I_0 = 11\,\mu A$}
+
+    En esta simulación, se usaron los siguientes valores iniciales para los parámetros de las neuronas tipo HH.
+    \begin{table}[H]
+    \centering
+    \begin{tabular}{c| c| c}
+    {\bf Variable }& {\bf Neurona 1} & { \bf Neurona 2} \\ \hline
+        V [mV]     & 0.1             & 0.1               \\  \hline
+        m          & 0.1             & 0.1              \\  \hline
+        h          & 0.4             & 0.4               \\  \hline
+        n          & 0.4             & 0.4               \\  \hline
+        s          & 0.1             & 0.3               \\  \hline
+    
+    \end{tabular}
+    
+    \end{table}
+
+    En la animación del voltaje de las dos neuronas involucradas \footnote{}
+
+
+
+
+\begin{thebibliography}{50}
+
+%\onecolumn
+\bibitem{HH} Izhikevich E. M. Capítulo 2. Sección 2.3: Hodgkin-Huxley Model en {\sl Dynamical Systems in Neuroscience: The Geometry of Excitability and Bursting} (2005).  The Neurosciences Institute.
+\bibitem{syn} Börgers C, Krupa M, Gielen S. The response of a classical Hodgkin-Huxley neuron to an inhibitory input pulse. J Comput Neurosci. 2010;28(3):509–526. doi:10.1007/s10827-010-0233-8
+
+\end{thebibliography}
+
+\end{document}
