@@ -1,9 +1,10 @@
 set term png 1 size 1200,800 enhanced font 'Verdana,26'
 
-set output "../Graficos/current_11.png"
+out_file="../Graficos/current_15_in.png"
+file_current="./gsyn_T_desfase_ej_2_current_15_in.txt"
 
-file_current="./freq_current_ej_2_current_11.txt"
-
+###############################################################
+set output out_file
 set title "Frecuencia y Desfaseje en función de g_{syn}"
 
 set ytics nomirror tc lt 1

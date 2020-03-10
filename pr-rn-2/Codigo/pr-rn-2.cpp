@@ -3,6 +3,7 @@
 #include <math.h>
 #include <string>
 #include <sstream>
+#include <stdlib.h>
 #include "pr-rn-2.h"
 
 
@@ -86,7 +87,7 @@ void Ejercicio1()
 //////////////////////////////////
 
 
-float HogdkinHuxleyNeuron_desfase(double h, double g_syn, int N, float* period, float* desfase, ofstream& myfile1, ofstream&myfile2)
+float HogdkinHuxleyNeuron_desfase(double h, double g_syn, int N, float* period, float* desfase, ofstream& myfile1, ofstream&myfile2, int I)
 {	
 	rk_vector aux1 ={0,0,0,0,0,0};
 	rk_vector aux2 ={0,0,0,0,0,0};
@@ -94,9 +95,7 @@ float HogdkinHuxleyNeuron_desfase(double h, double g_syn, int N, float* period, 
 	rk_vector v1 ={0.1,0.1,0.4,0.4,0.2, 0.1};
 	rk_vector v2 ={0.1,0.1,0.4,0.4,0.2, 0.3};
 
-	double I=11.;
-
-	int flag=0;
+	int flag=0, flag2=0;
 
 	double t_i=0.0, t_f=0.0, t_2=0.0;
 
@@ -105,14 +104,16 @@ float HogdkinHuxleyNeuron_desfase(double h, double g_syn, int N, float* period, 
 				HH_neuron_t(&v1, &aux1, I + I_t(v1.var1, g_syn, v1.var5), h);
 				HH_neuron_t(&v2, &aux2, I + I_t(v2.var1, g_syn, v2.var5), h);
 
-				if (v1.var1>0.0 && i >0.5*(float)N && aux1.var1< 0.0 && flag==0) {t_i=v1.t - h*v1.var1/(v1.var1 - aux1.var1); flag++;} 
+				if (v1.var1>0.0 && i >0.5*(float)N && aux1.var1< 0.0 && flag==0) {t_i=v1.t ; flag++;} 
 
-				if (v1.var1>0.0 && i >0.5*(float)N && aux1.var1< 0.0 && flag==1 && abs(v1.t - t_i)>h) {t_f=v1.t -h*v1.var1/(v1.var1 - aux1.var1); flag++;} 
+				if (v1.var1>0.0 && i >0.5*(float)N && aux1.var1< 0.0 && flag==1 && abs(v1.t - t_i)>h) {t_f=v1.t ; flag++;} 
 		
-				if (v2.var1>0.0 && i >0.5*(float)N && aux2.var1< 0.0 && flag==2) {t_2=v2.t + h*v2.var1/(v2.var1 - aux2.var1); flag++;} 
+				if (v2.var1>0.0 && i >0.5*(float)N && aux2.var1< 0.0 && flag2==0) {t_2=v2.t ; flag2++;} 
 
 				*period = t_f-t_i;
-				*desfase = abs(t_2 - t_f)< *period ? t_2 - t_f : abs(t_2 - t_f)- *period ;
+				//*desfase = (t_2 - t_f );
+
+				*desfase = abs(t_2 - t_f) < *period ? abs(t_2 - t_f) : abs(t_2 - t_f) - *period ;
 
 				myfile1 << v1.t << "\t" << v1.var1 << "\t" << v1.var2 << "\t" << v1.var3 << "\t" << v1.var4<< "\t" << I + I_t(v1.var1, g_syn, v1.var5) << endl; 	
 				myfile2 << v2.t << "\t" << v2.var1 << "\t" << v2.var2 << "\t" << v2.var3 << "\t" << v2.var4<< "\t" << I + I_t(v2.var1, g_syn, v2.var5) << endl; 	
@@ -122,7 +123,7 @@ float HogdkinHuxleyNeuron_desfase(double h, double g_syn, int N, float* period, 
 				copy_rk_vector(&aux1, &v1); copy_rk_vector(&aux2, &v2);
 			}
 
-	//cout << t_f << "\t" << t_i << endl;
+	//cout << t_f << "\t" << t_2 << endl;
 	
 	if (flag==2) return t_f - t_i;
 
@@ -142,19 +143,20 @@ void Ejercicio2()
 
 	float period=0.0, desfase=0.0;
 
-	ofstream myfile1 ("ejercicio_2_1_current_11.txt");
-	ofstream myfile2 ("ejercicio_2_2_current_11.txt");
+	ofstream myfile1 ("ejercicio_2_1_current_15_in.txt");
+	ofstream myfile2 ("ejercicio_2_2_current_15_in.txt");
 	
-	ofstream freq_Current("gsyn_T_desfase_ej_2_current_11.txt");
+	ofstream freq_Current("gsyn_T_desfase_ej_2_current_15_in.txt");
 
 	for (int i = 0; i < n_i; ++i)
 	{	
 		g_syn= 2.0*(float)i/((float)n_i);
-		HogdkinHuxleyNeuron_desfase( h, g_syn, n, &period, &desfase, myfile1, myfile2);
+		HogdkinHuxleyNeuron_desfase( h, g_syn, n, &period, &desfase, myfile1, myfile2, 15);
 		freq_Current << g_syn << "\t" << period << "\t" << desfase <<endl;
 		myfile1<<"\n\n\n\n\n\n\n\n" <<endl;
 		myfile2<<"\n\n\n\n\n\n\n\n" <<endl;
 	}
+
 
 
 	myfile1.close();

@@ -49,7 +49,7 @@ float s_t(float V, float s){
 	return (s_inf(V) - s)/tau_s;
 }
 
-const double V_syn=0.0;
+const double V_syn=-80.0;
 
 double I_t( double V, double g_syn, double s)
 {
