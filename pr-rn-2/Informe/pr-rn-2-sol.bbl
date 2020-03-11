@@ -52,5 +52,7 @@
 %</preamble>
 \bibitem [{Note1()}]{Note1}%
   \BibitemOpen
-  \bibinfo {note} {Pepe}\BibitemShut {NoStop}%
+  \bibinfo {note} {\protect \url
+  {https://github.com/astrocronopio/NN_IB/blob/master/pr-rn-2/Graficos/current_15.gif}}\BibitemShut
+  {NoStop}%
 \end{thebibliography}%

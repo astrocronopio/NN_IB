@@ -17,14 +17,16 @@ Para este ejercicio:
 
 void Ejercicio4()
 {	
-	rk_vector v ={0.0,0.0,0.4,0.4,0.2};
+	rk_vector v ={0.0,0.0,0.0,0.0,0.0};
 
-	int n = 2500;
-	int n_i=8000;
+	int n = 20000;
+	int n_i=500;
 
-	double h=0.1;
+	double h=0.005;
 
-	double current=-10.000;
+	double i_f=50.0;
+
+	double current=00.00;
 
 	float period=0.0;
 
@@ -32,11 +34,11 @@ void Ejercicio4()
 
 	ofstream freq_Current("freq_current_ej_4.txt");
 
-	for (int i = 0; i < n_i; ++i)
+	for (float i = 0; i < n_i; ++i)
 	{	
-		current = (i> 0.5*(float)n_i ? current-0.01 : current+0.01);
+		current = (i < 0.5*n_i ? current + 2.*i_f/n_i :  current - 2.0*i_f/n_i);
 
-		if (i==0.5*(float)n_i ) freq_Current <<"\n\n\n\n\n\n\n"<< endl;
+		if (i==n_i/2.0) freq_Current <<"\n\n\n\n\n\n\n"<< endl;
 		period=HogdkinHuxleyNeuron(&v, h, current, 0, n, myfile, false);
 		freq_Current << current << "\t" << period <<endl;
 
@@ -49,11 +51,11 @@ void Ejercicio4()
 
 void Ejercicio5()
 {
-	rk_vector v ={0.0,0.0,0.1,0.1,0.1};
+	rk_vector v ={0.0,0.0,0.0,0.0,0.0};
 
-	int n = 10000;
+	int n = 5000;
 
-	double h=0.1;
+	double h=0.01;
 	float period=0.0;
 
 	ofstream myfile ("ejercicio_5.txt");

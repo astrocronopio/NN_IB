@@ -98,10 +98,11 @@ float HogdkinHuxleyNeuron(rk_vector* v, double h, double I, int n, int N, ofstre
 				aux.var2 = update_x(v->var2, x0.var2, x1.var2, x2.var2, x3.var2);
 				aux.var3 = update_x(v->var3, x0.var3, x1.var3, x2.var3, x3.var3);
 				aux.var4 = update_x(v->var4, x0.var4, x1.var4, x2.var4, x3.var4);
+
 				aux.t+=h;
 	
-				if (v->var1>0.0 && i >0.5*(float)N && aux.var1< 0.0 && flag==0) {t_i=v->t; flag++;} 
-				if (v->var1>0.0 && i >0.5*(float)N && aux.var1< 0.0 && flag==1  && abs(aux.t-v->t)>h)  {t_f=v->t -h*v->var1/(v->var1 - aux.var1); flag++;} 
+				if (v->var1>0.0-40 && i >0.5*(float)N && aux.var1< 0.0-40 && flag==0) {t_i=v->t; flag++;} 
+				if (v->var1>0.0-40 && i >0.5*(float)N && aux.var1< 0.0-40 && flag==1  && abs(v->t-t_i)>h)  {t_f=v->t; flag++;} 
 
 				v->t+=h;
 				copy_rk_vector(&aux, v);

@@ -1,5 +1,5 @@
 \input{Preamble.sty}
-
+\usepackage{hyperref}
 \begin{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Título%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -73,37 +73,52 @@ donde la corriente $I_0$ debe ser un valor tal que para las dos neuronas produzc
 
 \subsection{Simulaciones}
 
-En esta sección se varía el parámetro $g_{syn}$ entre $0$ y 2 ${\text{mS}}/{\text{cm}^2}$ con $\Delta g_{syn}=0.02\,{\text{mS}}/{\text{cm}^2}$ para 100 iteraciones. En cada interación se mantiene fijo un valor para $V_{syn}$. La simulación utiliza un variación de tiempo de $\Delta t 0.1\,$ms y realizan $2000$ interaciones, para un total de 200\,ms.
-
-    \subsubsection{Caso $V_{syn}= 0\,\text{mV}$ con una corriente $I_0 = 11\,\mu A$}
-
-    En esta simulación, se usaron los siguientes valores iniciales para los parámetros de las neuronas tipo HH.
+En esta sección se varía el parámetro $g_{syn}$ entre $0$ y 2 ${\text{mS}}/{\text{cm}^2}$ con $\Delta g_{syn}=0.02\,{\text{mS}}/{\text{cm}^2}$ para 100 iteraciones. En cada interación se mantiene fijo un valor para $V_{syn}$. La simulación utiliza un variación de tiempo de $\Delta t =  0.005\,$ms y realizan $50000$ interaciones, para un total de 250\,ms. Además para cada valor el $g_{syn}$, las condiciones iniciales de las neuronas son tales que las mismas no estén en fase. Estás condiciones están dadas en la Tabla~\ref{tab:ini}. 
     \begin{table}[H]
     \centering
     \begin{tabular}{c| c| c}
     {\bf Variable }& {\bf Neurona 1} & { \bf Neurona 2} \\ \hline
-        V [mV]     & 0.1             & 0.1               \\  \hline
+        V [mV]     & 80.0            & -80.0               \\  \hline
         m          & 0.1             & 0.1              \\  \hline
-        h          & 0.4             & 0.4               \\  \hline
-        n          & 0.4             & 0.4               \\  \hline
-        s          & 0.1             & 0.3               \\  \hline
-    
+        h          & 0.3             & 0.7               \\  \hline
+        n          & 0.1             & 0.3               \\  \hline
+        s          & 0.0             & 0.0               \\      
     \end{tabular}
-    
+    \caption{Condiciones iniciales las neuronas del tipo Hodgkin-Huxley.}   
+         \label{tab:ini}
     \end{table}
+Los parámetros adimensionales m, h y n están asociados a los canales de activación e  inactivación de sodio y al canal de potasio respectivamente.
 
-    En la animación del voltaje de las dos neuronas involucradas \footnote{}
+   \subsubsection{Caso \texorpdfstring{$V_{syn}= 0\,\text{mV}$}{}   con  \texorpdfstring{$I_0 = 15\,\mu A$}{}}
+
+    En la Fig.\,\ref{fig:des_fre} del voltaje y del desfase de las dos neuronas involucradas, se observarse la disminución de la frecuencia de las neuronas con el aumento del valor de $g_{syn}$, debido a que la corriente $I_{syn}$ disminuye en media la corriente dentro de la neurona, esto es consistente con la curva f-I de las neuronas del tipo HH, donde la frecuencia aumenta con la corriente en la neurona.  El valor de la corriente, así como los spikes en función del valor de $g_{syn}$ pueden verse en \footnote{\url{https://github.com/astrocronopio/NN_IB/blob/master/pr-rn-2/Graficos/current_15.gif}}
 
 
+
+    \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.5\textwidth]{../Graficos/current_15.png}
+            \caption{Desfase y frecuencia de las neuronas en función de $g_{syn}$}
+            \label{fig:des_fre}
+        \end{figure}   
+
+
+    \subsubsection{Caso \texorpdfstring{$V_{syn}= -80\,\text{mV}$}{}   con  \texorpdfstring{$I_0 = 15\,\mu A$}{}}
+
+
+    \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.5\textwidth]{../Graficos/current_15_in.png}
+            \caption{Desfase y frecuencia de las neuronas en función de $g_{syn}$ para $V_{syn}=-80\,$mV.}
+            \label{fig:des_fre_in}
+        \end{figure}
 
 
 
 \begin{thebibliography}{50}
-
 %\onecolumn
 \bibitem{HH} Izhikevich E. M. Capítulo 2. Sección 2.3: Hodgkin-Huxley Model en {\sl Dynamical Systems in Neuroscience: The Geometry of Excitability and Bursting} (2005).  The Neurosciences Institute.
 \bibitem{syn} Börgers C, Krupa M, Gielen S. The response of a classical Hodgkin-Huxley neuron to an inhibitory input pulse. J Comput Neurosci. 2010;28(3):509–526. doi:10.1007/s10827-010-0233-8
-
 \end{thebibliography}
 
 \end{document}

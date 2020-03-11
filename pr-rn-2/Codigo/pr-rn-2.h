@@ -8,6 +8,7 @@
 
 using namespace std;
 
+
 const float tau_s= 3.0;
 
 float Heaviside(float V){
@@ -49,12 +50,8 @@ float s_t(float V, float s){
 	return (s_inf(V) - s)/tau_s;
 }
 
-const double V_syn=-80.0;
 
-double I_t( double V, double g_syn, double s)
-{
-	return -g_syn*s*(V-V_syn);
-}
+
 
 //////////////////////////////////////////////////
 
