@@ -91,19 +91,26 @@ Los parámetros adimensionales m, h y n están asociados a los canales de activa
 
    \subsubsection{Caso \texorpdfstring{$V_{syn}= 0\,\text{mV}$}{}   con  \texorpdfstring{$I_0 = 15\,\mu A$}{}}
 
-    En la Fig.\,\ref{fig:des_fre} del voltaje y del desfase de las dos neuronas involucradas, se observarse la disminución de la frecuencia de las neuronas con el aumento del valor de $g_{syn}$, debido a que la corriente $I_{syn}$ disminuye en media la corriente dentro de la neurona, esto es consistente con la curva f-I de las neuronas del tipo HH, donde la frecuencia aumenta con la corriente en la neurona.  El valor de la corriente, así como los spikes en función del valor de $g_{syn}$ pueden verse en \footnote{\url{https://github.com/astrocronopio/NN_IB/blob/master/pr-rn-2/Graficos/current_15.gif}}
+    En la Fig.\,\ref{fig:des_fre} se observa las curvas del voltaje y del desfase de las dos neuronas involucradas en función de la conductancia $g_{syn}$. Se observa la disminución de la frecuencia de las neuronas con el aumento del valor de $g_{syn}$, debido a que la corriente $I_{syn}$ disminuye en media la corriente dentro de la neurona, esto es consistente con la curva f-I de las neuronas del tipo HH, donde la frecuencia aumenta con la corriente en la neurona.  
 
-
-
-    \begin{figure}[H]
+        \begin{figure}[H]
             \centering
             \includegraphics[width=0.5\textwidth]{../Graficos/current_15.png}
-            \caption{Desfase y frecuencia de las neuronas en función de $g_{syn}$}
+            \caption{Desfase y frecuencia de las neuronas en función de $g_{syn}$. Los valores de la frecuencia están a la izquierda del gráfico mientras que los valores del desfase se muestran a la derecha.}
             \label{fig:des_fre}
-        \end{figure}   
+        \end{figure}  
+
+    Analizando la curva del desfase, se observa que este valor disminuye a media que aumenta el valor de $g_{syn}$. Por lo que aumentando este parámetro, puedo lograr que las dos neuronas se sincronicen.
+
+       El valor de la corriente, así como los spikes en función del valor de $g_{syn}$ pueden verse en \footnote{\url{https://github.com/astrocronopio/NN_IB/blob/master/pr-rn-2/Graficos/current_15.gif}}
+
+  
+
 
 
     \subsubsection{Caso \texorpdfstring{$V_{syn}= -80\,\text{mV}$}{}   con  \texorpdfstring{$I_0 = 15\,\mu A$}{}}
+
+    En la Fig.\,\ref{fig:des_fre_in} se observa una tendencia creciente en el valor de la corr
 
 
     \begin{figure}[H]
