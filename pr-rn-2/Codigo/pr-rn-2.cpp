@@ -6,11 +6,8 @@
 #include <stdlib.h>
 
 
-
-const double V_syn=-80.0;
-
 double I_t( double V, double g_syn, double s)
-{
+{	double V_syn=80.0;
 	return -g_syn*s*(V-V_syn);
 }
 #include "pr-rn-2.h"
@@ -101,8 +98,9 @@ float HogdkinHuxleyNeuron_desfase(double h, double g_syn, int N, float* period, 
 	rk_vector aux1 ={0,0,0,0,0,0};
 	rk_vector aux2 ={0,0,0,0,0,0};
 
-	rk_vector v1 ={0,+80,0.1,0.3,0.1, 0.0};
-	rk_vector v2 ={0,-80,0.1,0.7,0.3, 0.0};
+	rk_vector v1 ={0.0,8.0,0.1,0.4,0.3, 0.01};
+	rk_vector v2 ={0.0,-8.0,0.1,0.4,0.1, 0.01};
+
 
 	int flag=0, flag2=0;
 
@@ -113,11 +111,11 @@ float HogdkinHuxleyNeuron_desfase(double h, double g_syn, int N, float* period, 
 				HH_neuron_t(&v1, &aux1, I + I_t(v1.var1, g_syn, v1.var5), h);
 				HH_neuron_t(&v2, &aux2, I + I_t(v2.var1, g_syn, v2.var5), h);
 
-				if (v1.var1>0.0-40 && i >0.5*(float)N && aux1.var1< 0.0-40 && flag==0) {t_i=v1.t ; flag++;} 
+				if (v1.var1>0.0-4 && i >0.5*(float)N && aux1.var1< 0.0-4 && flag==0) {t_i=v1.t ; flag++;} 
 
-				if (v1.var1>0.0-40 && i >0.5*(float)N && aux1.var1< 0.0-40 && flag==1 && abs(v1.t - t_i)>h) {t_f=v1.t ; flag++;} 
+				if (v1.var1>0.0-4 && i >0.5*(float)N && aux1.var1< 0.0-4 && flag==1 && abs(v1.t - t_i)>h) {t_f=v1.t ; flag++;} 
 		
-				if (v2.var1>0.0-40 && i >0.5*(float)N && aux2.var1< 0.0-40 && flag2==0) {t_2=v2.t ; flag2++;}
+				if (v2.var1>0.0-4 && i >0.5*(float)N && aux2.var1< 0.0-4 && flag2==0) {t_2=v2.t ; flag2++;}
 				//if (v2.var1>0.0 && i >0.5*(float)N && aux2.var1< 0.0 && flag2==1) {t_2=v2.t ; flag2++;}
 
 
@@ -151,12 +149,12 @@ float HogdkinHuxleyNeuron_desfase(double h, double g_syn, int N, float* period, 
 void Ejercicio2()
 {	
 
-	int n = 50000;
+	int n = 100000;
 	int n_i= 100;
 
 	double g_syn=0.0;
 
-	double h=0.005;
+	double h=0.01;
 
 	float period=0.0, desfase=0.0;
 

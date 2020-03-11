@@ -40,10 +40,9 @@ Considerando que las tasas de disparo $f_e$ y $f_i$ son positivas, donde $0$ imp
 \end{align}
 
 Por lo que finalmente llegamos a un sistema de ecuaciones lineales para las tasas. Resolviendo este sistema, las tasas son iguales a 
-%En cambio para la tasa $f_e$ dependiendo del valor de la conductancias puede tomar un valor negativo; por hipótesis asumimos que $f_e \ge 0$, esto implica que la actividad o la cantidad de spikes es nula.
 \begin{align}
-     f_i = \frac{g_{ie}I_e + I_iA}{g_{ei}g_{ie}+ AB}\\
-     f_i = \frac{g_{ei}I_i + I_eB}{g_{ei}g_{ie}+ AB} 
+     f_i = (g_{ie}I_e + I_iA)(g_{ei}g_{ie}+ AB)^{-1}\\
+     f_i = (g_{ei}I_i + I_eB)(g_{ei}g_{ie}+ AB)^{-1} 
 \end{align}
 donde $A= 1 - g_{ee}$ y $B=1+g_{ii}$. Como buscamos que las tasas sean positivas, implica que 
 
@@ -64,55 +63,108 @@ Las neuronas del tipo Hogdkin-Huxley se basan las ecuaciones presentadas en \cit
 \end{align}
 donde $V$ es el potencial de  la neurona y $\tau$ es el tiempo característico asociado a la inhibición. En este trabajo se considera  $\tau = 3\,$ms.
 
-Para estudiar la interacción entre dos neuronas de Hogdkin-Huxley, consideramos que están conectadas simétricamente, es decir, la corriente $I(t)$ para ambas tiene la siguiente forma
-\begin{align}
-    I(t)            &= I_0 + I_{syn}(t)\\
-    I_{syn}(t)      &= -g_{syn}s(t)(V-V_{syn}),
-\end{align}
+Para estudiar la interacción entre dos neuronas de Hogdkin-Huxley, consideramos que están conectadas simétricamente, es decir, la corriente $I(t)$ para ambas tiene de la forma
+$I(t) = I_0 + I_{syn}(t) $ con 
+\begin{equation}
+     I_{syn}(t)      = -g_{syn}s(t)(V-V_{syn}),
+ \end{equation} 
 donde la corriente $I_0$ debe ser un valor tal que para las dos neuronas produzcan spikes periódicamente, $s(t)$ es el parámetro descrito anteriormente, $g_{syn}$ es la conductancia asociada con la entrada sináptica y $V_{syn}$ es el potencial sináptico.
 
 \subsection{Simulaciones}
 
-En esta sección se varía el parámetro $g_{syn}$ entre $0$ y 2 ${\text{mS}}/{\text{cm}^2}$ con $\Delta g_{syn}=0.02\,{\text{mS}}/{\text{cm}^2}$ para 100 iteraciones. En cada interación se mantiene fijo un valor para $V_{syn}$. La simulación utiliza un variación de tiempo de $\Delta t =  0.005\,$ms y realizan $50000$ interaciones, para un total de 250\,ms. Además para cada valor el $g_{syn}$, las condiciones iniciales de las neuronas son tales que las mismas no estén en fase. Estás condiciones están dadas en la Tabla~\ref{tab:ini}. 
-    \begin{table}[H]
-    \centering
-    \begin{tabular}{c| c| c}
-    {\bf Variable }& {\bf Neurona 1} & { \bf Neurona 2} \\ \hline
-        V [mV]     & 80.0            & -80.0               \\  \hline
-        m          & 0.1             & 0.1              \\  \hline
-        h          & 0.3             & 0.7               \\  \hline
-        n          & 0.1             & 0.3               \\  \hline
-        s          & 0.0             & 0.0               \\      
-    \end{tabular}
-    \caption{Condiciones iniciales las neuronas del tipo Hodgkin-Huxley.}   
-         \label{tab:ini}
-    \end{table}
-Los parámetros adimensionales m, h y n están asociados a los canales de activación e  inactivación de sodio y al canal de potasio respectivamente.
-
    \subsubsection{Caso \texorpdfstring{$V_{syn}= 0\,\text{mV}$}{}   con  \texorpdfstring{$I_0 = 15\,\mu A$}{}}
 
-    En la Fig.\,\ref{fig:des_fre} se observa las curvas del voltaje y del desfase de las dos neuronas involucradas en función de la conductancia $g_{syn}$. Se observa la disminución de la frecuencia de las neuronas con el aumento del valor de $g_{syn}$, debido a que la corriente $I_{syn}$ disminuye en media la corriente dentro de la neurona, esto es consistente con la curva f-I de las neuronas del tipo HH, donde la frecuencia disminuye con la corriente en la neurona.    El valor de la corriente, así como los spikes en función del valor de $g_{syn}$ pueden verse en \footnote{\url{https://github.com/astrocronopio/NN_IB/blob/master/pr-rn-2/Graficos/current_15.gif}}
+En esta sección se varía el parámetro $g_{syn}$ entre $0$ y 2 ${\text{mS}}/{\text{cm}^2}$ con $\Delta g_{syn}=0.02\,{\text{mS}}/{\text{cm}^2}$ para un total 100 iteraciones. En cada interación se mantiene fijo un valor para $V_{syn}$. La simulación de la evolución temporal se utiliza una variación de tiempo de $\Delta t =  0.005\,$ms y realizan $50000$ interaciones, para un total de 250\,ms. Para cada iteración de los valores de $g_{syn}$, las condiciones iniciales de las neuronas son tales que las mismas no estén en fase. Estás condiciones están dadas en la Tabla~\ref{tab:ini}. 
 
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c| c| c |c |c|c}
+    Neurona & V [mV] & m    & h     & n     & s     \\ \hline
+    1       & 80      & 0.1  & 0.7   & 0.1   & 0.0   \\ \hline
+    2       & -80     & 0.1  & 0.3   & 0.3   & 0.0  \\
+   \end{tabular}
+    \caption{Condiciones iniciales las neuronas del tipo Hodgkin-Huxley.}  
+    \label{tab:ini} 
+    \end{table}
+%
+%    \begin{table}[H]
+%    \centering
+%    \begin{tabular}{c| c| c}
+%    {\bf Variable }& {\bf Neurona 1} & { \bf Neurona 2} \\ \hline
+%        V [mV]     & 80.0            & -80.0               \\  \hline
+%        m          & 0.1             & 0.1              \\  \hline
+%        h          & 0.3             & 0.7               \\  \hline
+%        n          & 0.1             & 0.3               \\  \hline
+%        s          & 0.0             & 0.0               \\      
+%    \end{tabular}
+%    \caption{Condiciones iniciales las neuronas del tipo Hodgkin-Huxley.}   
+%         \label{tab:ini}
+%    \end{table}
+Los parámetros adimensionales m, h y n están asociados a los canales de activación e  inactivación de sodio y al canal de potasio respectivamente.
+
+En la Fig.\,\ref{fig:des_fre} se observa las curvas de la frecuencia y del desfase $\Theta$ de las dos neuronas en función de la conductancia $g_{syn}$. Los valores de la frecuencia y la conductancia se encuentra a la izquierda y derecha del gráfico respectivamente. Se observa la disminución de la frecuencia de las neuronas con el aumento del valor de $g_{syn}$, debido a que la corriente $I_{syn}$ disminuye en media la corriente dentro de la neurona, esto es consistente con la curva f-I de las neuronas del tipo Hodgkin-Huxley, donde la frecuencia disminuye con la corriente en la neurona. 
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.5\textwidth]{../Graficos/current_15.png}
-            \caption{Desfase y frecuencia de las neuronas en función de $g_{syn}$. Los valores de la frecuencia están a la izquierda del gráfico mientras que los valores del desfase se muestran a la derecha.}
+            \includegraphics[width=0.5\textwidth]{current_15.png}
+            \caption{Desfase y frecuencia de las neuronas en función de $g_{syn}$.}
             \label{fig:des_fre}
         \end{figure}  
 
-    Analizando la curva del desfase, se observa que este valor disminuye a media que aumenta el valor de $g_{syn}$. Por lo que aumentando este parámetro, puedo lograr que las dos neuronas se sincronicen. 
-  
-    \subsubsection{Caso \texorpdfstring{$V_{syn}= -80\,\text{mV}$}{}   con  \texorpdfstring{$I_0 = 15\,\mu A$}{}}
+Analizando la curva del desfase, se observa que este valor disminuye a media que aumenta el valor de $g_{syn}$. Por lo que aumentando este parámetro, puedo lograr que las dos neuronas se sincronicen, en otras palabras que $\Theta=0$\,s. 
 
-    En la Fig.\,\ref{fig:des_fre_in} se observa una tendencia creciente en el valor de la corr
+\subsubsection{Caso \texorpdfstring{$V_{syn}= 80\,\text{mV}$}{}   con  \texorpdfstring{$I_0 = 15\,\mu A$}{}}
 
 
-    \begin{figure}[H]
+
+En esta sección se varía el parámetro $g_{syn}$ de la misma manera que la sección anterior. En la simulación de la evolución temporal se utiliza una variación de tiempo de $\Delta t =  0.01\,$ms y realizan $100000$ interaciones, para un total de 1000\,ms. Para cada iteración de $g_{syn}$, las condiciones iniciales de las neuronas son tales que las mismas estén desfasadas por un valor pequeño. Estás condiciones están dadas en la Tabla~\ref{tab:ini_in}.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c| c| c |c |c|c}
+    Neurona & V [mV] & m    & h     & n     & s     \\ \hline
+    1       & 8      & 0.1  & 0.4   & 0.3   & 0.01   \\ \hline
+    2       & -8     & 0.1  & 0.4   & 0.1   & 0.01  \\
+   \end{tabular}
+    \caption{Condiciones iniciales las neuronas del tipo Hodgkin-Huxley.}  
+    \label{tab:ini_in} 
+    \end{table}
+%\begin{table}[H]
+%    \centering
+%    \begin{tabular}{c| c| c}
+%    {\bf Variable }& {\bf Neurona 1} & { \bf Neurona 2} \\ \hline
+%        V [mV]     & 8.0            & -8.0               \\  \hline
+%        m          & 0.1             & 0.1              \\  \hline
+%        h          & 0.4             & 0.4               \\  \hline
+%        n          & 0.3             & 0.1               \\  \hline
+%        s          & 0.01             & 0.01               \\      
+%    \end{tabular}
+%    \caption{Condiciones iniciales las neuronas del tipo Hodgkin-Huxley.}  
+%    \label{tab:ini_in} 
+%    \end{table}
+   En la Fig.\,\ref{fig:des_fre_in} se observa que para valores pequeños de la conductancia $g_{syn}$ las neuronas empiezan con $\Theta= 0.06\,$ms. A medida que $g_{syn}$ aumenta su valor también aumenta $\Theta$, a diferencia de cuando $V_{syn}=0\,$mV. Dado que $-\nicefrac{T}{2}<\Theta < \nicefrac{T}{2}$, alrededor de $g_{syn}=1.2\,\text{mS}/\text{cm}^2$ se observa una discontinuidad asociada al cambio del signo de $\Theta$. Así como también para otro valores de $g_{syn}$. Análogo al caso $V_{syn}=0\,$mV, la frecuencia disminuye con el $g_{syn}$.
+
+   \begin{figure}[H]
             \centering
-            \includegraphics[width=0.5\textwidth]{../Graficos/current_15_in.png}
+            \includegraphics[width=0.5\textwidth]{current_15_in.png}
             \caption{Desfase y frecuencia de las neuronas en función de $g_{syn}$ para $V_{syn}=-80\,$mV.}
             \label{fig:des_fre_in}
         \end{figure}
+
+    En las Figs.\, \ref{fig:gsyn0-1} y \ref{fig:gsyn1-2} se observan los spikes de ambas neuronas en función del tiempo para valores de $g_{syn}$ igual a $0.1\,\text{mS}/\text{cm}^2$ y $1.2\,\text{mS}/\text{cm}^2$ respectivamente. En la Fig. \ref{fig:gsyn0-1} se ve como los spikes están sincronizadas con un desfase despreciable. %, además que el valor de la corriente oscila sobre el valor de $I_0$ con una amplitud pequeña de $\approx 1.5\,\mu$A. 
+    En cambio en la Fig.\,\ref{fig:gsyn1-2}, para $g_{syn}=1.2\,\text{mS}/\text{cm}^2$, los spikes están desfasados.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.415\textwidth]{current_15_in_gsyn_0-1.png}
+        \caption{Curvas del voltaje y la corriente en función del tiempo para un valor de $g_{syn}=0.1\,\text{mS}/\text{cm}^2$}
+        \label{fig:gsyn0-1}
+    \end{figure}
+
+        \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.415\textwidth]{current_15_in_gsyn_1-2.png}
+        \caption{Curvas del voltaje y la corriente en función del tiempo para un valor de $g_{syn}=1.2\,\text{mS}/\text{cm}^2$}
+        \label{fig:gsyn1-2}
+    \end{figure}
 
 
 

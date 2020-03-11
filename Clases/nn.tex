@@ -720,6 +720,125 @@ Después de aplicar el algoritmo M veces, llego a una relación del tipo:
 	M \le \frac{N(\eta + 2\kappa)}{\eta D^2(\vec w ^{opt})}
 \end{equation}
 
-(está en el herz)
+(está en el herzt)
+
+\section{11/03/2020}
+
+\subsection{Continuación del perceptron: problema de capacidad}
+
+¿Hasta que punto un problema es linealmente separable? Tengo $p$ vectores de entrada, con $n$ dimensiones. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{5-1.png}
+\end{figure}
+Considerando la figura anterior, ¿cuantas formas de colorear, dado dos colores, esa misma cantidad de datos? El color es la clasificación (si, no). 
+
+En total, tenemos $2^P$ es el número de problemas posibles. Para los problemas linealmente separables, eventualmente los datos pueden repetirse en alguna de las n-componentes, por lo tanto los problemas linealmente separables, $C(p,n)$.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.5\textwidth]{5-2.png}
+\end{figure}
+
+Cuando la dimensión es muy grande, la curva tienden a un escalón, por lo que tenemos un límite para $p$, $p_{max}= 2n$ para $n>>1$.
+
+Para demostrar eso, consideramos $c(1,n)=2$ porque puedo colorear de dos formas distintas, análogamente $c(p,1)=2$. Ahora, ¿cuánto vale $c(p+1,n)$ si ya conozco el valor de $c(p,n)$? 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{5-3.png}
+\end{figure}
+
+Dependiendo de donde caiga el nuevo punto, puede ser posible o no que tenga alguno  de los dos colores. Hay condiciones donde no, otras que sí. Cuando es posible que tenga los dos colores, lo que se hace es considerar el hiperplano de dimensión de n-1 que pasa por ese punto, ahora tengo otro nuevo problema donde tengo que ordenar los p vectores en este. Por lo tanto. $c(p+1, n) = c(p,n) + c(p, n-1)$, donde el primer término es cuando no tiene que ver los casos donde no tiene opción, y el segundo es por el hiperplano.
+
+
+Tenemos la relación de recurrencia y los casos base, y llegamos a que 
+\begin{align}
+	c(p,n)=&\binom{p-1}{0}c(1,n) + \binom{p-1}{1}c(1,n-1)\\
+	&\dots + \binom{p-1}{p-1}c(1,n-p+1)\\
+	&\text{Si } p \le n  \rightarrow c(p,n)=2^p 
+\end{align}
+
+Ahora si $p>n$
+\begin{align}
+	&c(p,n)=\binom{p-1}{0}c(1,n) + \binom{p-1}{1}c(1,n-1) \\
+	&\dots + \binom{p-1}{n-1}c(1,1)\\
+	&c(p,n)=2\times(\binom{p-1}{0} + \binom{p-1}{1}\dots + \binom{p-1}{n-1})\\
+	&\text{Si }p=2n \rightarrow c(2n,n) = 2^{p-1}
+\end{align}
+
+Al final, lo que no vamos a ver, es que para el caso general, 
+\begin{equation}
+	c(p,n) = 2^{p-1} \bigg[ 1- erf \bigg( \sqrt{\frac{p}{2}} \big(\frac{2n}{p}-1\big)\bigg) \bigg]
+\end{equation}
+
+La gracia de todos esto, es que justamente, acá se ve que aumentando la dimensión, es decir agregando capas, puedo tener un problema linealmente separable. 
+
+\subsection{Problema lineal}
+
+Dada una entrada $\vec x ^\mu$, hago la cuenta y tengo un output $o ^\mu = \sum^N _j w_j x^\mu _j$, pero la salida deseada es $\sigma^\mu$. ¿Cómo soluciono los pesos si estas matrices no son cuadradas?
+
+\begin{align}
+	w_{j} = \frac{1}{N}\sum^P _{\mu,\nu=1} \sigma ^\mu (Q^{-1})_{\mu,\nu} x^\nu_j\\
+	Q_{\mu,\nu}= \frac{1}{N} \sum^N_j x^\mu_j x^\nu_j
+\end{align}
+Como Q tiene una inversa si $x_i$ y $x_j$ son linelmente independientes, eso implica que en un sistema lineal, la capacidad es máxima cuando $P_{max}=N$
+
+\dots
+
+Para resolver en general usamos cuadrados mínimos. Definimos la función error $E(\{ w_j\}) = \nicefrac{1}{2} \big( \sigma^\mu - \sum w_j x_k^\mu \big)^2$. Ahora minimizando con un   $w_j$,
+\begin{align}
+	-\eta \frac{\partial W}{\partial w_j} = \Delta w_j \qquad \eta << 1
+\end{align}
+Haciendo la cuenta,  sale que
+\begin{align}
+    \Delta w_l &= -\eta \sum_\mu \bigg( \sigma ^ \mu - \sum_j w_jx_j^\mu\bigg) x^\mu_l\\
+    \delta^\mu &= \sigma ^ \mu - \sum_j w_jx_j^\mu \quad \leftarrow \text{ADALINE}
+\end{align}
+%Otro problema surge cuando todos los puntos ya están alineados en un hiperplano. Bueno, ahora tenemos que considerar   
+
+Considerando la clase anterior, cambiamos la función de Heaviside por la función $\delta ^\mu$.
+
+
+\subsection{Problema no lineal continuo}
+
+Considerando la función g continua y derivable, donde el output $o^\mu = g(\sum w_j x_j^\mu)$, definiendo la función de error (función de costo) como antes. Tenemos que
+
+\begin{align}
+    &\Delta w_l = -\eta \sum_\mu \bigg( \sigma ^ \mu - g(\sum_j w_jx_j^\mu)\bigg) x^\mu_l g'(\sum_j w_jx_j^\mu)\\
+    &\text{Sea }h^\mu = \sum_j w_jx_j^\mu \\
+    &\Delta w_l = -\eta \sum_\mu \bigg( \sigma ^ \mu - o^\mu\bigg) g'(h^\mu)  x^\mu_l\\
+    &\text{Sea }\delta^\mu =  \bigg( \sigma ^ \mu - g(h^\mu)\bigg) g'(h^\mu)\\
+    &\Delta w_l = -\eta \sum_\mu \delta^\mu  x^\mu_l\\
+\end{align}
+
+Por ejemplo, consideremos $g(h)=tanh(\beta h) \rightarrow g' = \beta (1-g^2)$, y me ahorro tiempo de cálculo.
+
+Otra función de costo, es una basada en una especie de entropía, 
+
+\begin{equation}
+	E(\{ w_j \}) = \sum_\mu \bigg[  \frac{1+\sigma^\mu}{2} \log{\frac{1+\sigma^\mu}{1+o^\mu}} + \frac{1-\sigma^\mu}{2} \log{\frac{1-\sigma^\mu}{1-o^\mu}}  \bigg]
+\end{equation}
+
+Donde el peso es igual a 
+
+\begin{align}
+	\frac{\partial E}{\partial w_l} &=  \sum _\mu \bigg[  \frac{1+\sigma^\mu}{2} {\frac{-g'(h^\mu) x^\mu_l}{1+o^\mu}} + \frac{1-\sigma^\mu}{2} {\frac{g'(h^\mu) x^\mu_l}{1-o^\mu}}  \bigg]\\
+	\frac{\partial E}{\partial w_l} &=  \frac{-g'(h^\mu) x^\mu_l}{2}\sum _\mu \bigg[  -\frac{1+\sigma^\mu}{1+o^\mu} + \frac{1-\sigma^\mu}{1-o^\mu} \bigg]\\
+	&\text{Si g es tanh}\\
+		\frac{\partial E}{\partial w_l} &= \sum_\mu \beta (o^\mu - \sigma^\mu) x_l^\mu
+\end{align}
+
+
+\begin{itemize}
+	\item lineal
+	\item no lineal
+	\item algoritmo de aprendizaje que resuelve el problema
+	\item Si pongo muchas capas lineales no gano nada
+	\item pero si son no lineales
+	\item boom Machine learning xdxdxdxdxd
+\end{itemize}
+
 
 \end{document}
