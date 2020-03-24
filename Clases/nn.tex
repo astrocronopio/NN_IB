@@ -336,11 +336,11 @@ Estas curvas cumplen por ejemplo
 	dn/dt ==0 
 \end{equation}
 
-Los puntos fijos son las intersecciones de las nullclinas, donde la variacionde ambas es nula. En cada región de las nullclinas, pueden tener regiones que tiene ``flechas'' que se cierram, eso no implica que es oscilatorio o estable. Para saber eso necesitamos estudiar la estabilidad de un sistema de 2x2. 
+Los puntos fijos son las intersecciones de las nullclinas, donde la variacion de ambas es nula. En cada región de las nullclinas, pueden tener regiones que tiene ``flechas'' que se cierran, eso no implica que es oscilatorio o estable. Para saber eso necesitamos estudiar la estabilidad de un sistema de 2x2. 
 
 \subsection{estabilidad de un sistema de 2x2}
 
-Tengo el punto fijo por la intersección $(v_0,n_0)$ ¿como  hago el calculo de estabilidad? Armo la matriz, Para eso uso las ecuaciones, derivo y las evaluo en el punto fijo
+Tengo el punto fijo por la intersección $(v_0,n_0)$ ¿como  hago el calculo de estabilidad? Armo la matriz, Para eso uso las ecuaciones, derivo y las evalúo en el punto fijo
 \[
 \begin{matrix}
 	f'(v_0) &  -1   \\
@@ -348,7 +348,7 @@ Tengo el punto fijo por la intersección $(v_0,n_0)$ ¿como  hago el calculo de 
 \end{matrix}
 \]
 
-Podemos armar el polinomio caracteristico, como una matriz de 2x2, hallar las soluciones es fácil
+Podemos armar el polinomio característico, como una matriz de 2x2, hallar las soluciones es fácil
 
 \begin{equation}
 	\lambda = T \pm \sqrt{T^2 - 4D}/ 2
@@ -363,7 +363,7 @@ donde T es la traza y D es el determinante.
 
 
 
-Si estudio como varian las raíces del polinomios, donde se hacen negativos, positivos para la parte real e imaginaria, puede tener distintas zonas. Estas caracteristicas depende del valor de f'(V0) por ejemplo si es positivo es inestable, y si el negativo estable. La frecuencia con la que gira si es estbale es la parte imaginaria de los autovalores.
+Si estudio como varían las raíces del polinomios, donde se hacen negativos, positivos para la parte real e imaginaria, puede tener distintas zonas. Estas características depende del valor de f'(V0) por ejemplo si es positivo es inestable, y si el negativo estable. La frecuencia con la que gira si es estable es la parte imaginaria de los auto-valores.
 
 \begin{figure}[htbp]
 	\centering
@@ -372,7 +372,7 @@ Si estudio como varian las raíces del polinomios, donde se hacen negativos, pos
 
 
 
-Puedo ir corriendo la curva hasta llegar el punto que el minimo de la cubica coincide con la recta. Incluso hasta cambiar el signo de los valores de las raíces, cambiando de intestable a Hopf. En este modelo no hay saddle node.
+Puedo ir corriendo la curva hasta llegar el punto que el mínimo de la cubica coincide con la recta. Incluso hasta cambiar el signo de los valores de las raíces, cambiando de inestable a Hopf. En este modelo no hay saddle node.
 
 \subsection{Rebote post-inhibidor}
 
@@ -409,12 +409,14 @@ COn la sigmoide puedo generar un saddle node, peude calcular el tiempo con la ra
 
 Como las neuronas interactuan entre sí, mediante distintos mecanismos. Una por ejemplo es  la sinapsis químicas. 
 
-fig 6
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.5\textwidth]{+6.png}
+\end{figure}
 
-Como escribimos esto en ecuaciones? Agregamos a un término del tipo $-g_{syn}(t)(V-V_{syn})$.Este tiene un cuenta la curv
-ita de cuando se abre al canal. (fig 6)
+Como escribimos esto en ecuaciones? Agregamos a un término del tipo $-g_{syn}(t)(V-V_{syn})$.Este tiene un cuenta la curvita de cuando se abre al canal. (fig 6)
 
-Otro forma que tienen de interactuar las neuronas son las sinapsis electrotónicas. Básicamente es un canal entre membranas que deja pasar iones, el término es $-g_{electrotonico}*(V-V')$
+Otro forma que tienen de interactuan las neuronas son las sinapsis electrotónicas. Básicamente es un canal entre membranas que deja pasar iones, el término es $-g_{electrotonico}*(V-V')$
 
 \section{Clase anterior falté.}
 
@@ -424,9 +426,9 @@ Deadline de la práctica 2: Marzo 11.
 
 Deadline de la práctica 3:
 
-\subsection{Propiedades estadisticas de trenes de spikes}
+\subsection{Propiedades estadísticas de trenes de spikes}
 
-Hasta ahora describimos a las neuronas individuales, modificando la corriente que entra, o cambiando sus propiedades. Al fin y al cabo, yo solo puedo acceder a ellas desde afuera, no puedo controlar la corriente en la práctica. Aunque de alguna maner  si podemos controlar el entorno donde está en un ser vivo, es decir, podemos estimular al ser de distintas maneras.
+Hasta ahora describimos a las neuronas individuales, modificando la corriente que entra, o cambiando sus propiedades. Al fin y al cabo, yo solo puedo acceder a ellas desde afuera, no puedo controlar la corriente en la práctica. Aunque de alguna manera  si podemos controlar el entorno donde está en un ser vivo, es decir, podemos estimular al ser de distintas maneras.
 
 Dado un estimulo, el output no es determinista. En la realidad no controlamos todas la entradas: esto es la variabilidad entre trials. Tenemos los spikes, puedo calcular el histograma de ISI (inter spike interval), para saber la media $<ISI>$ o $<ISI^2>$. También la variancia $\sigma^2$, y con ella podemos calcular un coeficiente de variabilidad $CV = \nicefrac{\sigma_{ISI}}{<ISI>}$.
 
@@ -524,16 +526,16 @@ Consideremos las funciones de $s(t)$ y $r(t)$ para estimulo y respuesta efectiva
 	\caption{La cajita es el cerebro}
 \end{figure}
 
-Sabemos que dado la red, la respuesta depende del esstimulo, por que podemos escribir la relación $r(t) =  F[s(t')]$ con $t<t'$ para respetar causalidad. La funcional puede expandirse en series de Volterra, un ejemplo es lo siguiente:
+Sabemos que dado la red, la respuesta depende del estímulo, por que podemos escribir la relación $r(t) =  F[s(t')]$ con $t<t'$ para respetar causalidad. La funcional puede expandirse en series de Volterra, un ejemplo es lo siguiente:
 
 \begin{equation}
 	r(t) = F[s(t')]= r_0 + \int_0^\infty d\tau D(\tau) s(t-\tau) + \int_0^\infty d_{\tau_1} d \tau_2 D(\tau_1, \tau_2) s(t-\tau_1) s(t-\tau_2)
 \end{equation}
-donde $D(\tau)$ es conocidad para el kernel lineal (o Wiener) y $r_0$ es una constante.
+donde $D(\tau)$ es conocida para el kernel lineal (o Wiener) y $r_0$ es una constante.
 
-Proponemos un kernel y obtenemos una función $r_{est}(t)$, y lo que voy a buscar es minimizar la funcióñ error $E = \int_o^T dt (r_{est}(t)-r(t))$, por que buscamos que $\nicefrac{dF}{dr_0}=0$ y $\nicefrac{dE}{dD}$.
+Proponemos un kernel y obtenemos una función $r_{est}(t)$, y lo que voy a buscar es minimizar la función error $E = \int_o^T dt (r_{est}(t)-r(t))$, por que buscamos que $\nicefrac{dF}{dr_0}=0$ y $\nicefrac{dE}{dD}$.
 
-Estas son derivadas funciones, para hacer númericamente esta cuenta, se hace así.
+Estas son derivadas funciones, para hacer numéricamente esta cuenta, se hace así.
 
 \begin{itemize}
 	\item El argumento t->$i\Delta$ y $\tau \rightarrow j\Delta$
