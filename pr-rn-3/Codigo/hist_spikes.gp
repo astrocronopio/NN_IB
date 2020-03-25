@@ -1,5 +1,5 @@
 
-set terminal qt 13 enhanced font 'Verdana,26' size 1000,750 
+set terminal qt 13 enhanced font 'Verdana,26' size 1200,750 
 
 sigma=31.65
 
@@ -7,11 +7,37 @@ set auto
 set xlabel "-{/Symbol t} [ms]"
 set ylabel "D({/Symbol t})"
 
-set xtics 20
+set xtics 25
 
-set xrange [:100]
+set xrange [0:100]
 
-plot 'filtro.dat' using ($1/10):($2/sigma) w l lc rgb "brown" lw 3 notit 
+plot 'filtro.dat' using ($1/10):($2/sigma)  every 2 w l lc rgb "gray" lw 3 tit "Cada 0.1 ms"
+replot 'filtro.dat' using ($1/10):($2/sigma) every 5 w lp lc rgb "pink" lw 3 tit "Cada 0.5 ms"
+replot 'filtro.dat' using ($1/10):($2/sigma) every 10 w l lc rgb "brown" lw 3 tit "Cada 1 ms"
+replot 'filtro.dat' using ($1/10):($2/sigma) every 10::5 w l lc rgb "brown" lw 3 notit 
+
+
+
+
+
+
+set terminal qt 12 enhanced font 'Verdana,26' size 1200,750 
+
+sigma=31.65
+
+set auto
+set xlabel "-{/Symbol t} [ms]"
+set ylabel "D({/Symbol t})"
+
+set xtics 25
+
+set xrange [0:100]
+
+
+plot 'filtro.dat' using ($1/10):($2/sigma) every 6 w lp lc rgb "pink" lw 3 tit "Cada 0.5 ms"
+replot 'filtro.dat' using ($1/10):($2/sigma) every 12 w l lc rgb "brown" lw 3 tit "Cada 1 ms"
+replot 'filtro.dat' using ($1/10):($2/sigma) every 12::6 w l lc rgb "brown" lw 3 notit 
+
 
 #pause(-1)
 binwidth_isi=10

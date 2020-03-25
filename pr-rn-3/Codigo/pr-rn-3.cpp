@@ -121,14 +121,14 @@ void q_rs(const char* stimulus, const char* hist_spikes, const char* filtro)
 			int N_signal = 10001;
 
 
-	for (int i = -500; i < 10000; ++i) //Este es tau
+	for (int i = -5000; i < 5000; ++i) //Este es tau
 	{
 		for (int j = 0; j < N_signal; ++j) //Esto recorre el valor de la señal
 		{	t_evaluate= j+i;
 			
 			if (   t_evaluate>=0 
 				&& t_evaluate<N_signal 
-				&& vector_spikes[j]!=0) sum+=vector_signal[t_evaluate];
+				&& vector_spikes[j]!=0) sum+=vector_signal[t_evaluate]*vector_spikes[j];
 				
 		}
 		filtro_file << i << "\t" << "\t" << sum << endl;
@@ -145,9 +145,9 @@ void q_rs(const char* stimulus, const char* hist_spikes, const char* filtro)
 
 int main(int argc, char const *argv[])
 {	
-	isi_and_N_dist("spikes.dat");
+	//isi_and_N_dist("spikes.dat");
 
-	//q_rs("stimulus.dat", "sum_spikes_por_celda.dat", "filtro.dat");
+	q_rs("stimulus.dat", "sum_spikes_por_celda.dat", "filtro.dat");
 
 	return 0;
 }
