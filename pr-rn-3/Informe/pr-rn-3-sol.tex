@@ -106,32 +106,53 @@ Para calcular la tasa de disparo subyacente,  se sumaron todos los spikes medido
 
 \section*{Filtro asociado a la neuronas \texorpdfstring{$D(\tau)$}{}}
 
-
 Considerando que la señal es ruido blanco, es decir que $Q_{s,s}(\tau, \tau')= \sum_{spikes} \sigma^2_s \delta(\tau-\tau')$, se obtiene que el filtro asociado que se  calcula  según las Ec.(\ref{d_t}) y Ec.(\ref{qrs}) 
 \begin{align}
     D(\tau) &= \frac{Q_{r,s}(-\tau)}{\sigma^2}, \label{d_t}\\
-    \text{con } Q_{r,s}(-\tau) &= \sum_{spikes} S(t_{spike} - \tau) \label{qrs}
+    \text{  con } Q_{r,s}(-\tau)&= \sum_{spikes} S(t_{spike} - \tau) \label{qrs}
 \end{align}
 donde $S(t)$ es el valor del estimulo al tiempo $t$
 
-Para calcular este gráfico, lo que implementó  el siguiente algoritmo.
-
-\begin{lstlisting}[language=C++]
-
-	}
-	
-	filtro_file<< i <<"\t"<< sum/sigma_s <<endl;
-	sum=0.0;
-}
-\end{lstlisting}
-
+Para calcular la función $D(\tau)$ se implementó  el  algoritmo presentado en el Apéndice \ref{algor}. El mismo recorre un rango de los posibles valores de $-\tau$. Luego para un valor particular $-\tau$, se calcula la suma S($\sum_{spikes} S(t_{spike} - \tau$) sobre los spikes de todas las pruebas, donde en $t_{spike}$ se midió al menos un spike en esa ventana. Los valores de $D(\tau)$ calculados se presentan en en la Fig.\ref{d_tau}. En la misma se observa distintos intervalos de tiempo para $-\tau$, se observa que si tomo cada $5\,$ms tiene una envolvente cada $10\,$ms. Esto debe tener relación con los tiempos de respuesta que se esperan del receptor acústico si el ruido fuera realmente blanco, y la envolvente es así porque el intervalo es el doble que el otro.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.45\textwidth]{../Graficos/D_tau.png}
-	\caption{Filtro lineal}
+	\includegraphics[width=0.5\textwidth]{../Graficos/D_tau.png}
+	\caption{La función $D(\tau)$ considerando distintos intervalos tiempo entre cada interacción.}
+	\label{d_tau}
 \end{figure}
 
+
+
+\appendix
+\section{Algoritmo} \label{algor}
+
+Para calcular la función $D(\tau)$, se implementó  el siguiente algoritmo:
+
+\begin{lstlisting}[language=C++]
+int N  		  = 10000;
+int N_signal  = 10001;
+
+float var_s  = 31.65;
+
+for (int i = 0; i < 1000; ++i) //Tau
+{
+ for (int j = 0; j < N; ++j) //t_spike
+ 	{ t_evaluate= j+i;
+	  
+	  if (t_evaluate>=0 
+	  && t_evaluate<N
+	  && vec_spikes[j]!=0) 
+
+	  sum+=vec_signal[t_evaluate]*vec_spikes[j];
+	  //Suma sobre todos los spikes en esa ventana
+	}
+	
+	filtro_file<< i <<"\t"<< sum/var_s<<endl;
+	sum=0.0;
+}
+\end{lstlisting}
+donde \textbf{vec\_signal} y \textbf{vec\_spikes} son los vectores que contienen a la señal y a la cantidad de spikes de las 128 pruebas en cada ventana de medición, \textbf{N\_signal} y \textbf{N} son las longitudes de \textbf{vec\_signal} y \textbf{vec\_spikes} respectivamente.
 
 \end{document}
 
