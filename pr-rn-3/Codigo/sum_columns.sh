@@ -1,5 +1,6 @@
-awk '{for (i=1; i<=NF; i++)  sum[int(i/100)+1]+= $i/1.0;}
+awk 'function floor(x){y=int(x); return(x<y?y-1:y)} {for (i=1; i<=NF; i++)  sum[floor(i/100)+1]+= $i/1.0;}
 		END{for (i=1; i<length(sum); i++) print (i )*10, sum[i]/100;}'  	spikes.dat > sum_spikes.dat
+
 
 
 

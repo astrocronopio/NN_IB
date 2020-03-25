@@ -54,11 +54,11 @@ set terminal qt 3 enhanced font 'Verdana,26' size 1000,750
 
 set auto
 set xlabel "t [ms]"
-set ylabel "r(t)"
+set ylabel "r(t) [Hz]"
 
 set xtics 200
 
-plot 'sum_spikes.dat' using ($1):2 w lp lc rgb "blue" lw 3 notit 
+plot 'sum_spikes.dat' using ($1):($2*100) w lp lc rgb "blue" lw 3 notit 
 
 
 
