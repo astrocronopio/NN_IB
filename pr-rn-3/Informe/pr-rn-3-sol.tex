@@ -94,20 +94,23 @@ Considerando que los procesos renewal cumplen que $CV=F^2$, en este experimento 
 
 \section*{Histograma de la tasa de disparo \texorpdfstring{$r(t)$}{}}
 
+Para calcular la tasa de disparo subyacente,  se sumaron todos los spikes medidos en las 128 pruebas en cada ventana de tiempo de medición. Posteriormente, para suavizar la curva, se tomó un intervalo de tiempo $\Delta t = 10\,$ms, en el que se dividió el rango de tiempo de medición y se sumaron todos los spikes en esa venta, para después dividir $\Delta$. Así se calculó los puntos de la Fig.\,\ref{r_t}.
+
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.45\textwidth]{../Graficos/r_t.png}
 	\caption{Tasa de disparo subyacente}
+	\label{r_t}
 \end{figure}
 
 \section*{Filtro asociado a la neuronas \texorpdfstring{$D(\tau)$}{}}
 
 
-Considerando que la señal es ruido blanco, es decir que $Q_{s,s}(\tau, \tau')= \sum_{spikes} \sigma^2_s \delta(\tau-\tau')$, se obtiene que el filtro asociado es 
+Considerando que la señal es ruido blanco, es decir que $Q_{s,s}(\tau, \tau')= \sum_{spikes} \sigma^2_s \delta(\tau-\tau')$, se obtiene que el filtro asociado que se  calcula  según las Ec.(\ref{d_t}) y Ec.(\ref{qrs}) 
 \begin{align}
-    D(\tau) &= \frac{Q_{r,s}(-\tau)}{\sigma^2}, \\
-    \text{con } Q_{r,s}(-\tau) &= \sum_{spikes} S(t_{spike} - \tau)
+    D(\tau) &= \frac{Q_{r,s}(-\tau)}{\sigma^2}, \label{d_t}\\
+    \text{con } Q_{r,s}(-\tau) &= \sum_{spikes} S(t_{spike} - \tau) \label{qrs}
 \end{align}
 donde $S(t)$ es el valor del estimulo al tiempo $t$
 
@@ -116,9 +119,9 @@ Para calcular este gráfico, lo que implemente fue el siguiente algoritmo.
 \begin{lstlisting}[language=C++]
 	int N_signal = 10001;
 
-	for (int i = -500; i < 10000; ++i) //Tau
+	for (int i = -10000; i < 10000; ++i) //Tau
 	{
-		for (int j = 0; j < N_signal; ++j) //Signal
+	 for (int j = 0; j < N_signal; ++j) //Signal
 		{	t_evaluate= j+i;
 			
 			if (t_evaluate>=0 

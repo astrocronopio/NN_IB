@@ -26,25 +26,25 @@ awk '{if(j<1) for (i=1;i<=NF;i++) sum[i]+=$i; j=NR}
 
 
 ## Para el archivo stimulus
-media=$(awk 'BEGIN {counter=0; sum=0;sum_2=0;} {counter++; sum+=$2; sum_2+=$2*$2;} END {print sum_2/counter - (sum/counter)**2}' stimulus.dat)
-echo "$media"
+#media=$(awk 'BEGIN {counter=0; sum=0;sum_2=0;} {counter++; sum+=$2; sum_2+=$2*$2;} END {print sum_2/counter - (sum/counter)**2}' stimulus.dat)
+#echo "$media"
 #Total=$(awk 'BEGIN {counter=0} {counter=counter+1} END {print counter}'  $file_utctprh) 
 ##Sum of all events
 
-
-awk '
-{ 
-    for (i=1; i<=NF; i++)  {
-        a[NR,i] = $i
-    }
-}
-NF>p { p = NF }
-END {    
-    for(j=1; j<=p; j++) {
-        str=a[1,j]
-        for(i=2; i<=NR; i++){
-            str=str" "a[i,j];
-        }
-        print str
-    }
-}' spikes.dat > trans_spikes.dat
+#
+#awk '
+#{ 
+#    for (i=1; i<=NF; i++)  {
+#        a[NR,i] = $i
+#    }
+#}
+#NF>p { p = NF }
+#END {    
+#    for(j=1; j<=p; j++) {
+#        str=a[1,j]
+#        for(i=2; i<=NR; i++){
+#            str=str" "a[i,j];
+#        }
+#        print str
+#    }
+#}' spikes.dat > trans_spikes.dat#

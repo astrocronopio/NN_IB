@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.12.11)  25 MAR 2020 03:57
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.12.11)  25 MAR 2020 04:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1099,23 +1099,23 @@ Package babel Info: Redefining spanish shorthand "!
 (babel)             in language  on input line 95.
 Package babel Info: Redefining spanish shorthand "?
 (babel)             in language  on input line 95.
-<../Graficos/r_t.png, id=55, 752.8125pt x 564.60938pt>
+<../Graficos/r_t.png, id=56, 752.8125pt x 564.60938pt>
 File: ../Graficos/r_t.png Graphic file (type png)
 <use ../Graficos/r_t.png>
-Package pdftex.def Info: ../Graficos/r_t.png  used on input line 100.
+Package pdftex.def Info: ../Graficos/r_t.png  used on input line 102.
 (pdftex.def)             Requested size: 229.49844pt x 172.12375pt.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 104.
+(babel)             in language  on input line 107.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 104.
+(babel)             in language  on input line 107.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 104.
+(babel)             in language  on input line 107.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 104.
+(babel)             in language  on input line 107.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 104.
+(babel)             in language  on input line 107.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 104.
+(babel)             in language  on input line 107.
  (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
@@ -1129,52 +1129,52 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-<../Graficos/D_tau.png, id=56, 752.8125pt x 564.60938pt>
+<../Graficos/D_tau.png, id=59, 752.8125pt x 564.60938pt>
 File: ../Graficos/D_tau.png Graphic file (type png)
 <use ../Graficos/D_tau.png>
-Package pdftex.def Info: ../Graficos/D_tau.png  used on input line 139.
+Package pdftex.def Info: ../Graficos/D_tau.png  used on input line 142.
 (pdftex.def)             Requested size: 229.49844pt x 172.12375pt.
 
 No file pr-rn-3-sol.bbl.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 144.
+(babel)             in language  on input line 147.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 144.
+(babel)             in language  on input line 147.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 144.
+(babel)             in language  on input line 147.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 144.
+(babel)             in language  on input line 147.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 144.
+(babel)             in language  on input line 147.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 144.
+(babel)             in language  on input line 147.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 144.
+(babel)             in language  on input line 147.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 144.
+(babel)             in language  on input line 147.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 144.
+(babel)             in language  on input line 147.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 144.
+(babel)             in language  on input line 147.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 144.
+(babel)             in language  on input line 147.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 144.
+(babel)             in language  on input line 147.
 [2 <../Graficos/r_t.png (PNG copy)> <../Graficos/D_tau.png (PNG copy)>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 144.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 147.
 
 (./pr-rn-3-sol.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 144.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 144.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 147.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 147.
 Package rerunfilecheck Info: File `pr-rn-3-sol.out' has not changed.
 (rerunfilecheck)             Checksum: E5498085D953DCDACF22D181C71DD686;526.
  ) 
 Here is how much of TeX's memory you used:
- 15195 strings out of 494774
- 220370 string characters out of 6176661
- 631006 words of memory out of 5000000
- 18225 multiletter control sequences out of 15000+600000
- 15859 words of font info for 77 fonts, out of 8000000 for 9000
+ 15203 strings out of 494774
+ 220423 string characters out of 6176661
+ 634725 words of memory out of 5000000
+ 18229 multiletter control sequences out of 15000+600000
+ 15961 words of font info for 79 fonts, out of 8000000 for 9000
  87 hyphenation exceptions out of 8191
  46i,10n,60p,543b,1283s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
@@ -1190,10 +1190,10 @@ m/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></
 usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on pr-rn-3-sol.pdf (2 pages, 444491 bytes).
+Output written on pr-rn-3-sol.pdf (2 pages, 445342 bytes).
 PDF statistics:
- 141 PDF objects out of 1000 (max. 8388607)
- 116 compressed objects within 2 object streams
+ 144 PDF objects out of 1000 (max. 8388607)
+ 119 compressed objects within 2 object streams
  34 named destinations out of 1000 (max. 500000)
  15954 words of extra memory for PDF output out of 17280 (max. 10000000)
 
