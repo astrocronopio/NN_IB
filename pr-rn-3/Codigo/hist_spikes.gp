@@ -1,7 +1,7 @@
 
 set terminal qt 13 enhanced font 'Verdana,26' size 1000,750 
 
-sigma=31.649
+sigma=31.65
 
 set auto
 set xlabel "-{/Symbol t} [ms]"
@@ -14,7 +14,10 @@ plot 'filtro.dat' using ($1/10):($2/sigma) w l lc rgb "brown" lw 3 notit
 #pause(-1)
 binwidth_isi=10
 bin(x,width)=width*floor(x/width)
-N=7488
+
+
+N=14849
+
 
 
 set terminal qt 10 enhanced font 'Verdana,26' size 1000,750 

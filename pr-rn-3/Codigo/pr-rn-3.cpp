@@ -32,10 +32,10 @@ void isi_and_N_dist( const char* spikes)
 				{	
 					switch(line_spikes[i]) 
 					{	case '0':
-							if (counter) counter++; break;
+							counter++; break;
 
 						case '1':
-							if (counter) {
+							if (counter && i>0) {
 								isi_distribution << counter << endl;
 								isi+=counter;
 								isi_2+= counter*counter;
@@ -145,9 +145,9 @@ void q_rs(const char* stimulus, const char* hist_spikes, const char* filtro)
 
 int main(int argc, char const *argv[])
 {	
-	//isi_and_N_dist("spikes.dat");
+	isi_and_N_dist("spikes.dat");
 
-	q_rs("stimulus.dat", "sum_spikes_por_celda.dat", "filtro.dat");
+	//q_rs("stimulus.dat", "sum_spikes_por_celda.dat", "filtro.dat");
 
 	return 0;
 }

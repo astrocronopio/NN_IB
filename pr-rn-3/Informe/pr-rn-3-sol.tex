@@ -42,48 +42,54 @@ Redes~Neuronales - Instituto~Balseiro\\}
 \date[]{\lowercase{\today}} %%lw para lw, [] sin date
 
 \begin{abstract}
-Soluciones a los ejercicios de la práctica 3 de la materia de Redes Neuronales. En esta práctica se estudia la estadística de los resultados obtenidos para un experimento, donde se excita un receptor acústico de un saltamonte con un sonido.
+Soluciones a los ejercicios de la práctica 3 de la materia de Redes Neuronales. En esta práctica se estudia la estadística de los resultados obtenidos para un experimento, donde se excita un receptor acústico de un saltamontes mediante un sonido.
 \end{abstract} 
 \maketitle
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Introducción}
+%\section*{Introducción}
+
+\section*{Estímulo y Respuestas}
 
 
+Se realizaron 128 pruebas o realizaciones  donde se midió la respuesta del receptor de un saltamontes  acústico ante el mismo estimulo. En la parte superior de la Fig.\ref{experimento} se muestra se presenta el estímulo al que fue sometido el receptor acústico del insecto. Este estímulo tiene una varianza de  $\sigma^2_{s}= 31.65\,$dB$^2$.  
 
-\subsection*{Estímulo}
+En la parte inferior de la Fig.\ref{experimento} se muestra se muestran, como puntos azules, las respuestas a este estimulo en función del tiempo, la adquisición de datos se realizó en ventanas de $0.1\,$ms. La presencia del punto indica que se midió un spike para ese ventana de tiempo. 
+
+Puede verse que existen ventanas de tiempo donde se midieron más spikes que en otros, por ejemplo, la franja blanca para $t \approx 400\,$ms se tienen menos spikes que para $t\approx 1000\,$ms.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{../Graficos/stimulus.png}
+	\includegraphics[width=0.45\textwidth]{../Graficos/stimulus.png}
 	\caption{La figura superior representa la intensidad del estimulo en función de tiempo. La figura inferior representa todos los spikes observados en cada prueba.}
+	\label{experimento}
 \end{figure}
 
 
-La varianza del estimulo es de $\sigma^2_{s}= 31.649\,$dB$^2$
 \section*{Distribución de intervalos \texorpdfstring{$P(\tau)$}{}}
+
+Para cada prueba realizada, se calcula los intervalos de tiempo (ISI) entre dos spikes consecutivos, luego se calcula el histograma de estos valores como se muestra en la Fig.\,\ref{p_isi}. La distribución tiene una media de $\langle ISI \rangle = 85.198\,$ms y un varianza de $\sigma^2_{ISI}=3226.69\,$ms$^2$, mientras que el coeficiente de variabilidad es de $CV=0.659$. Se observa que existe un pico para $2.5\,$ms, esto puede indicar algo proceso característico del funcionamiento del receptor.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{../Graficos/p_isi.png}
+	\includegraphics[width=0.45\textwidth]{../Graficos/p_isi.png}
 	\caption{Distribución de probabilidad de los valores del ISI}
+	\label{p_isi}
 	\end{figure}
-
-
-La distribución tiene una media de $\langle ISI \rangle = 84.68\,$ms y un varianza de $\sigma^2_{ISI}=3111.96\,$ms$^2$.
-El factor $CV=0.659$
-
 
 \section*{Distribución de número de spikes \texorpdfstring{$P(N)$}{}}
 
+Se cuentan todos los spikes medidos en cada prueba realizada. De los mismo se calcula el histograma asociado obteniendo la distribución de número de spikes $P(N)$
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{../Graficos/p_N.png}
+	\includegraphics[width=0.45\textwidth]{../Graficos/p_N.png}
 	\caption{Distribución de probabilidad de la cantidad de spikes en cada realización del experimento.}
 \end{figure}
 
 
-La distribución tiene una media de $\langle N \rangle = 117.01$ y un varianza de $\sigma^2_{N}=183.195$.
-El factor de Fano $F=1.567$
+La distribución tiene una media de $\langle N \rangle = 117.01$ y un varianza de $\sigma^2_{N}=183.195$, mientras que el factor de Fano $F=1.567$.\\
+
+Considerando que los procesos renewal cumplen que $CV=F^2$, en este experimento puede afirmarse que no se trata de un proceso de renewal, es decir que los spikes depende de los spikes anteriores y no solo del anterior.
+
 
 
 \section*{Histograma de la tasa de disparo \texorpdfstring{$r(t)$}{}}
@@ -91,7 +97,7 @@ El factor de Fano $F=1.567$
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{../Graficos/r_t.png}
+	\includegraphics[width=0.45\textwidth]{../Graficos/r_t.png}
 	\caption{Tasa de disparo subyacente}
 \end{figure}
 
@@ -130,7 +136,7 @@ Para calcular este gráfico, lo que implemente fue el siguiente algoritmo.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{../Graficos/D_tau.png}
+	\includegraphics[width=0.45\textwidth]{../Graficos/D_tau.png}
 	\caption{Filtro lineal}
 \end{figure}
 
