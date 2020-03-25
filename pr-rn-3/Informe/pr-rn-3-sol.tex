@@ -113,7 +113,7 @@ Considerando que la señal es ruido blanco, es decir que $Q_{s,s}(\tau, \tau')= 
 \end{align}
 donde $S(t)$ es el valor del estimulo al tiempo $t$
 
-Para calcular la función $D(\tau)$ se implementó  el  algoritmo presentado en el Apéndice \ref{algor}. El mismo recorre un rango de los posibles valores de $-\tau$. Luego para un valor particular $-\tau$, se calcula la suma S($\sum_{spikes} S(t_{spike} - \tau$) sobre los spikes de todas las pruebas, donde en $t_{spike}$ se midió al menos un spike en esa ventana. Los valores de $D(\tau)$ calculados se presentan en en la Fig.\ref{d_tau}. En la misma se observa distintos intervalos de tiempo para $-\tau$, se observa que si tomo cada $5\,$ms tiene una envolvente cada $10\,$ms. Esto debe tener relación con los tiempos de respuesta que se esperan del receptor acústico si el ruido fuera realmente blanco, y la envolvente es así porque el intervalo es el doble que el otro.
+Para calcular la función $D(\tau)$ se implementó  el  algoritmo presentado en el Apéndice \ref{algor}. El mismo recorre un rango de los posibles valores de $-\tau$. Luego para un valor particular $-\tau$, se calcula la suma S($\sum_{spikes} S(t_{spike} - \tau$) sobre los spikes de todas las pruebas, donde en $t_{spike}$ se midió al menos un spike en esa ventana. Los valores de $D(\tau)$ calculados se presentan en en la Fig.\ref{d_tau}. En la misma se observa distintos intervalos de tiempo para $-\tau$, se observa que si tomo cada $5\,$ms tiene una envolvente cada $10\,$ms, lo que es de esperarse por ser el doble de 5.
 
 \begin{figure}[H]
 	\centering
@@ -121,8 +121,6 @@ Para calcular la función $D(\tau)$ se implementó  el  algoritmo presentado en 
 	\caption{La función $D(\tau)$ considerando distintos intervalos tiempo entre cada interacción.}
 	\label{d_tau}
 \end{figure}
-
-
 
 \appendix
 \section{Algoritmo} \label{algor}
