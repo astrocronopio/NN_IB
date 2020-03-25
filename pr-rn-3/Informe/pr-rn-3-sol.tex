@@ -1,5 +1,34 @@
 \input{Preamble.sty}
 \usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+%Code listing style named "mystyle"
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour},   commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
+\lstset{style=mystyle}
+
 \begin{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Título%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -13,17 +42,20 @@ Redes~Neuronales - Instituto~Balseiro\\}
 \date[]{\lowercase{\today}} %%lw para lw, [] sin date
 
 \begin{abstract}
-Soluciones a los ejercicios de la práctica 3 de la materia de Redes Neuronales. En esta práctica se estudia la estadística de los resultados obtenidos para un experimento. En mismo se excita una neurona con un estimulo oscilatorio.
+Soluciones a los ejercicios de la práctica 3 de la materia de Redes Neuronales. En esta práctica se estudia la estadística de los resultados obtenidos para un experimento, donde se excita un receptor acústico de un saltamonte con un sonido.
 \end{abstract} 
 \maketitle
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Introducción}
 
-\section*{Estimulo}
+
+
+\subsection*{Estímulo}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{../Graficos/stimulus.png}
-	\caption{La intensidad del estimulo en función de tiempo. La misma representa un sonido que estimula a un insecto.}
+	\caption{La figura superior representa la intensidad del estimulo en función de tiempo. La figura inferior representa todos los spikes observados en cada prueba.}
 \end{figure}
 
 
@@ -72,6 +104,35 @@ Considerando que la señal es ruido blanco, es decir que $Q_{s,s}(\tau, \tau')= 
     \text{con } Q_{r,s}(-\tau) &= \sum_{spikes} S(t_{spike} - \tau)
 \end{align}
 donde $S(t)$ es el valor del estimulo al tiempo $t$
+
+Para calcular este gráfico, lo que implemente fue el siguiente algoritmo.
+
+\begin{lstlisting}[language=C++]
+	int N_signal = 10001;
+
+	for (int i = -500; i < 10000; ++i) //Tau
+	{
+		for (int j = 0; j < N_signal; ++j) //Signal
+		{	t_evaluate= j+i;
+			
+			if (t_evaluate>=0 
+					&& t_evaluate<N_signal 
+					&& vector_spikes[j]!=0) 
+
+					sum+=vector_signal[t_evaluate];
+				
+		}
+		filtro_file<< i <<"\t"<< sum/sigma_s <<endl;
+		sum=0.0;
+	}
+\end{lstlisting}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{../Graficos/D_tau.png}
+	\caption{Filtro lineal}
+\end{figure}
 
 
 \end{document}

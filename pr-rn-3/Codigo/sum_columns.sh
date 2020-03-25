@@ -4,7 +4,7 @@ awk '{for (i=1; i<=NF; i++)  sum[int(i/100)+1]+= $i/1.0;}
 
 
 # Para 1
-awk '{for (i=1;i<=NF;i++) sum[i]+=$i;}
+awk '{if(j<1) for (i=1;i<=NF;i++) sum[i]+=$i; j=NR}
 		END{	N=length(sum);	for (i=1; i<N; i=i+1) 
 		print ( i )/1, (sum[i]);}'  	spikes.dat > sum_spikes_por_celda.dat
 
@@ -30,3 +30,21 @@ media=$(awk 'BEGIN {counter=0; sum=0;sum_2=0;} {counter++; sum+=$2; sum_2+=$2*$2
 echo "$media"
 #Total=$(awk 'BEGIN {counter=0} {counter=counter+1} END {print counter}'  $file_utctprh) 
 ##Sum of all events
+
+
+awk '
+{ 
+    for (i=1; i<=NF; i++)  {
+        a[NR,i] = $i
+    }
+}
+NF>p { p = NF }
+END {    
+    for(j=1; j<=p; j++) {
+        str=a[1,j]
+        for(i=2; i<=NR; i++){
+            str=str" "a[i,j];
+        }
+        print str
+    }
+}' spikes.dat > trans_spikes.dat
