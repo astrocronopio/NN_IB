@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.12.11)  25 MAR 2020 04:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.12.11)  25 MAR 2020 13:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1172,7 +1172,7 @@ Package rerunfilecheck Info: File `pr-rn-3-sol.out' has not changed.
 Here is how much of TeX's memory you used:
  15203 strings out of 494774
  220423 string characters out of 6176661
- 634725 words of memory out of 5000000
+ 634723 words of memory out of 5000000
  18229 multiletter control sequences out of 15000+600000
  15961 words of font info for 79 fonts, out of 8000000 for 9000
  87 hyphenation exceptions out of 8191
@@ -1190,7 +1190,7 @@ m/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></
 usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on pr-rn-3-sol.pdf (2 pages, 452436 bytes).
+Output written on pr-rn-3-sol.pdf (2 pages, 461587 bytes).
 PDF statistics:
  144 PDF objects out of 1000 (max. 8388607)
  119 compressed objects within 2 object streams

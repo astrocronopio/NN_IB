@@ -7,7 +7,9 @@ set auto
 set xlabel "-{/Symbol t} [ms]"
 set ylabel "D({/Symbol t})"
 
-set xtics 200
+set xtics 20
+
+set xrange [:100]
 
 plot 'filtro.dat' using ($1/10):($2/sigma) w l lc rgb "brown" lw 3 notit 
 
@@ -58,27 +60,28 @@ set ylabel "r(t) [Hz]"
 
 set xtics 200
 
+
 plot 'sum_spikes.dat' using ($1):($2*100) w lp lc rgb "blue" lw 3 notit 
 
 
 
 
-
-set terminal qt 8 enhanced font 'Verdana,26' size 1500,500 
-
-
-set auto
-set xlabel "t [ms]"
-set ylabel ""
-unset ytics
-set x2tics nomirror
-unset x2tics
-
-set yrange [0:1.5]
-
-set xtics 200
-
-plot 'sum_spikes_por_celda.dat' using ($1/10):($2) w l lc rgb "blue" lw 3 notit 
+#
+#set terminal qt 8 enhanced font 'Verdana,26' size 1500,500 
+#
+#
+#set auto
+#set xlabel "t [ms]"
+#set ylabel ""
+#unset ytics
+#set x2tics nomirror
+#unset x2tics
+#
+#set yrange [0:1.5]
+#
+#set xtics 200
+#
+#plot 'sum_spikes_por_celda.dat' using ($1/10):($2) w l lc rgb "blue" lw 3 notit 
 
 
 pause(-1)
