@@ -117,23 +117,24 @@ donde $S(t)$ es el valor del estimulo al tiempo $t$
 Para calcular este gráfico, lo que implementó  el siguiente algoritmo.
 
 \begin{lstlisting}[language=C++]
-	int N_signal = 10001;
+int N_signal = 10001;
 
-	for (int i = -10000; i < 10000; ++i) //Tau
-	{
-	 for (int j = 0; j < N_signal; ++j) //Signal
-		{	t_evaluate= j+i;
-			
-			if (t_evaluate>=0 
-					&& t_evaluate<N_signal 
-					&& vector_spikes[j]!=0) 
+for (int i = 0; i < 1000; ++i) //Tau
+{
+ for (int j = 0; j < N_signal; ++j) //Signal
+	{ t_evaluate= j+i;
+	  
+	  if (t_evaluate>=0 
+	  && t_evaluate<N_signal 
+	  && vecto_spikes[j]!=0) 
 
-					sum+=vector_signal[t_evaluate];
-				
-		}
-		filtro_file<< i <<"\t"<< sum/sigma_s <<endl;
-		sum=0.0;
+	  sum+=vecto_signal[t_evaluate]*vector_spikes[j];
+	  //Suma sobre todos los spikes en esa ventana
 	}
+	
+	filtro_file<< i <<"\t"<< sum/sigma_s <<endl;
+	sum=0.0;
+}
 \end{lstlisting}
 
 
