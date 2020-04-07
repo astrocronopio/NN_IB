@@ -28,8 +28,8 @@ def XOR_NN(N_input, N_hidden, N_output, thr, epochs, eta, inputs, expected):
 	hidden_w = np.random.uniform(size=(N_input,N_hidden))
 	output_w = np.random.uniform(size=(N_hidden,N_output))	
 	
-	hidden_bias =np.random.uniform(size=(1,N_hidden))
-	output_bias = np.random.uniform(size=(1,N_output))
+	hidden_bias =np.ones(shape=(1,N_hidden))
+	output_bias =np.ones(shape=(1,N_output))
 	
 	print("hidden weights init: {} \n".format(*hidden_w))
 	print("output weights init: {} \n".format(*output_w))
@@ -73,7 +73,7 @@ def XOR_NN(N_input, N_hidden, N_output, thr, epochs, eta, inputs, expected):
 	print("hidden weights end : {} \n".format(*hidden_w))
 	print("output weights end : {} \n".format(*output_w))
 	
-	print("\nSalida de la NN despues de {0} epochs con bias {1}: {2} ".format(epochs, "%1.1f"%thr, *predicted_output),end='')
+	print("\nSalida de la NN despues de {0} epochs con bias {1}: {2} ".format(epochs, "%1.1f"%thr, *predicted_output))
 
 	label_s= "%.1f" % thr
 	plt.plot(error_v, label=label_s)
