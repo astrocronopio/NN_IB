@@ -1,13 +1,13 @@
 awk 'function floor(x){y=int(x); return(x<y?y-1:y)} {for (i=1; i<=NF; i++)  sum[floor(i/100)+1]+= $i/1.0;}
-		END{for (i=1; i<length(sum); i++) print (i )*10, sum[i]/100;}'  	spikes.dat > sum_spikes.dat
+		END{for (i=1; i<length(sum); i++) print (i )*10, sum[i]/100;}'  	../spikes.dat > sum_spikes.dat
 
 
 
 
 # Para 1
-awk '{if(j<1) for (i=1;i<=NF;i++) sum[i]+=$i; j=NR}
+awk '{ for (i=1;i<=NF;i++) sum[i]+=$i}
 		END{	N=length(sum);	for (i=1; i<N; i=i+1) 
-		print ( i )/1, (sum[i]);}'  	spikes.dat > sum_spikes_por_celda.dat
+		print ( i )/1, (sum[i]);}'  	../spikes.dat > sum_spikes_por_celda.dat
 
 
 # Para 2

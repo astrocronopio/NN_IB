@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.12.11)  2 APR 2020 17:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.12.11)  8 APR 2020 10:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -713,7 +713,7 @@ Class revtex4-1 Info: Robustifying \LaTeX's \boldmath command on input line 3.
 Class revtex4-1 Info: cite was not loaded (OK!) on input line 3.
 Class revtex4-1 Info: mcite was not loaded (OK!) on input line 3.
 Class revtex4-1 Info: multicol was not loaded (OK!) on input line 3.
-No file pr-rn-4-sol.aux.
+(./pr-rn-4-sol.aux)
 \openout1 = `pr-rn-4-sol.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 3.
@@ -728,6 +728,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 3.
 LaTeX Font Info:    ... okay on input line 3.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 3.
 LaTeX Font Info:    ... okay on input line 3.
+
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count133
@@ -824,30 +825,68 @@ Class revtex4-1 Info: Line numbering not turned on yet on input line 3.
 \openout3 = `pr-rn-4-solNotes.bib'.
 
 Class revtex4-1 Info: Overriding \@LN@LLerror on input line 3.
+LaTeX Font Info:    Try loading font information for U+msa on input line 31.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 31.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+)
+<ejer_1_221.png, id=1, 607.26875pt x 373.395pt>
+File: ejer_1_221.png Graphic file (type png)
+<use ejer_1_221.png>
+Package pdftex.def Info: ejer_1_221.png  used on input line 48.
+(pdftex.def)             Requested size: 178.50311pt x 109.75743pt.
+<ejer_1_211.png, id=3, 613.29124pt x 394.47375pt>
+File: ejer_1_211.png Graphic file (type png)
+<use ejer_1_211.png>
+Package pdftex.def Info: ejer_1_211.png  used on input line 62.
+(pdftex.def)             Requested size: 178.50311pt x 114.8158pt.
+<ejer_2_NN1.png, id=4, 564.1075pt x 742.775pt>
+File: ejer_2_NN1.png Graphic file (type png)
+<use ejer_2_NN1.png>
+Package pdftex.def Info: ejer_2_NN1.png  used on input line 74.
+(pdftex.def)             Requested size: 178.50311pt x 235.04074pt.
+ [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./ejer_1_221.png> <./ej
+er_1_211.png>]
+<ejer_3.png, id=20, 569.12625pt x 814.04124pt>
+File: ejer_3.png Graphic file (type png)
+<use ejer_3.png>
+Package pdftex.def Info: ejer_3.png  used on input line 93.
+(pdftex.def)             Requested size: 153.00156pt x 218.83763pt.
 
 No file pr-rn-4-sol.bbl.
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./pr-rn-4-sol.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right .
-
-
- ) 
+[2 <./ejer_2_NN1.png> <./ejer_3.png>] (./pr-rn-4-sol.aux) ) 
 Here is how much of TeX's memory you used:
- 9367 strings out of 494774
- 136529 string characters out of 6176661
- 345833 words of memory out of 5000000
- 12557 multiletter control sequences out of 15000+600000
- 5407 words of font info for 26 fonts, out of 8000000 for 9000
+ 9563 strings out of 494774
+ 139609 string characters out of 6176661
+ 351943 words of memory out of 5000000
+ 12690 multiletter control sequences out of 15000+600000
+ 14818 words of font info for 66 fonts, out of 8000000 for 9000
  87 hyphenation exceptions out of 8191
- 46i,4n,42p,278b,359s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb>
-Output written on pr-rn-4-sol.pdf (1 page, 41337 bytes).
+ 46i,6n,42p,401b,359s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9
+.pfb>
+Output written on pr-rn-4-sol.pdf (2 pages, 236463 bytes).
 PDF statistics:
- 24 PDF objects out of 1000 (max. 8388607)
- 16 compressed objects within 1 object stream
+ 52 PDF objects out of 1000 (max. 8388607)
+ 31 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 8705 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 12821 words of extra memory for PDF output out of 14400 (max. 10000000)
 

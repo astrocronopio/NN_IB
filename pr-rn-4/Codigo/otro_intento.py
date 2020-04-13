@@ -23,6 +23,7 @@ def activation_deriv_ej1(x):
 def XOR_NN(N_input, N_hidden, N_output, epochs, eta, inputs, expected): 
 	error_v= []
 	sum_error=0.0
+	
 
 	#Random weights
 	hidden_w = np.random.uniform(size=(N_input,N_hidden))
@@ -39,39 +40,38 @@ def XOR_NN(N_input, N_hidden, N_output, epochs, eta, inputs, expected):
 	
 	#Training algorithm
 	for every_epoch in range(epochs):
-
-		#Forward 
-		hidden_layer_activation = np.dot(inputs,hidden_w) + hidden_bias # suma el bias
-		hidden_layer_output = activation_function_ej1(hidden_layer_activation)
-
-
-		output_layer_activation = np.dot(hidden_layer_output,output_w) + output_bias
-		predicted_output = activation_function_ej1(output_layer_activation)
+		predicted_output=[]
+		for index in range(len(inputs)):
+			#Forward 
+			hidden_layer_activation = np.dot(inputs[index],hidden_w) + hidden_bias # suma el bias
+			hidden_layer_output = activation_function_ej1(hidden_layer_activation)
 	
-		#Backpropation
+			output_layer_activation = np.dot(hidden_layer_output,output_w) + output_bias
+			predicted_output.append(activation_function_ej1(output_layer_activation))
 		
-		error = expected - predicted_output #ultima capa
+			#Backpropation
+			
+			error = expected[index] - predicted_output[index] #ultima capa
+			
+			#Error
+			if(every_epoch>0): #Tiro los primeros 20 porque siempre son cualquier cosa
+				for e in error:
+					sum_error+=error[0]*error[0]*0.5
+				error_v.append(sum_error)
+				sum_error=0
 		
-		#Error
-		if(every_epoch>0): #Tiro los primeros 20 porque siempre son cualquier cosa
-			for e in error:
-				sum_error+=error[0]*error[0]*0.5
-			sum_error=sum_error/len(error)
-			error_v.append(sum_error)
-			sum_error=0
-	
-		#Output NN
-		deriv_predicted_output = error * activation_deriv_ej1(predicted_output)
+			#Output NN
+			deriv_predicted_output = error * activation_deriv_ej1(predicted_output[index])
+			
+			error_hidden_layer = deriv_predicted_output.dot(output_w.T)
+			deriv_hidden_layer = error_hidden_layer * activation_deriv_ej1(hidden_layer_output)
 		
-		error_hidden_layer = deriv_predicted_output.dot(output_w.T)
-		deriv_hidden_layer = error_hidden_layer * activation_deriv_ej1(hidden_layer_output)
-	
-		#Update Weight
-		output_w +=  eta* hidden_layer_output.T.dot(deriv_predicted_output)  #Ese Transpose de mierda, como te pasaste por alto hdp
-		hidden_w +=  eta* inputs.T.dot(deriv_hidden_layer) 
-		
-		output_bias += eta*np.sum(deriv_predicted_output,axis=0,keepdims=True)
-		hidden_bias += eta*np.sum(deriv_hidden_layer,axis=0,keepdims=True)
+			#Update Weight
+			output_w +=  eta* hidden_layer_output.T.dot(deriv_predicted_output)  #Ese Transpose de mierda, como te pasaste por alto hdp
+			hidden_w +=  eta* np.dot(inputs[index],deriv_hidden_layer.T) 
+			
+			output_bias += eta*np.sum(deriv_predicted_output,axis=0,keepdims=True)
+			hidden_bias += eta*np.sum(deriv_hidden_layer,axis=0,keepdims=True)
 	
 	print("\nhidden weights end: ")
 	print(*hidden_w)

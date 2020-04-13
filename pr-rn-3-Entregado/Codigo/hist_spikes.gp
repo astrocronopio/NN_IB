@@ -10,15 +10,15 @@ set ylabel "D({/Symbol t})"
 
 set xtics 25
 
-set xrange [0:100]
+set xrange [-100:100]
 
 
-plot 'filtro.dat' using ($1/10):($2/sigma) every 6 w lp lc rgb "violet" lw 3 tit "Cada 0.5 ms"
-replot 'filtro.dat' using ($1/10):($2/sigma) every 12 w l lc rgb "brown" lw 3 tit "Cada 1 ms"
-replot 'filtro.dat' using ($1/10):($2/sigma) every 12::6 w l lc rgb "brown" lw 3 notit 
+plot 'filtro.dat' using (-$1/10):($2/sigma) every 1 w lp lc rgb "violet" lw 3 tit "Cada 0.5 ms"
+#replot 'filtro.dat' using (-$1/10):($2/sigma) every 12 w l lc rgb "brown" lw 3 tit "Cada 1 ms"
+#replot 'filtro.dat' using (-$1/10):($2/sigma) every 12::6 w l lc rgb "brown" lw 3 notit 
 
 
-#pause(-1)
+pause(-1)
 binwidth_isi=10
 bin(x,width)=width*floor(x/width)
 

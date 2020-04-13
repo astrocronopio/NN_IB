@@ -113,12 +113,11 @@ Considerando que la señal es ruido blanco, es decir que $Q_{s,s}(\tau, \tau')= 
 \end{align}
 donde $S(t)$ es el valor del estimulo al tiempo $t$
 
-Para calcular la función $D(\tau)$ se implementó  el  algoritmo presentado en el Apéndice \ref{algor}. El mismo recorre un rango de los posibles valores de $-\tau$. Luego para un valor particular $-\tau$, se calcula la suma S($\sum_{spikes} S(t_{spike} - \tau$) sobre los spikes de todas las pruebas, donde en $t_{spike}$ se midió al menos un spike en esa ventana. Los valores de $D(\tau)$ calculados se presentan en en la Fig.\ref{d_tau}. En la misma se observa distintos intervalos de tiempo para $-\tau$, se observa que si tomo cada $5\,$ms tiene una envolvente cada $10\,$ms, lo que es de esperarse por ser el doble de 5.
-
+Para calcular la función $D(\tau)$ se implementó  el  algoritmo presentado en el Apéndice \ref{algor}. El mismo recorre un rango de los posibles valores de $-\tau$. Luego para un valor particular $-\tau$, se calcula la suma S($\sum_{spikes} S(t_{spike} - \tau$) sobre los spikes de todas las pruebas, donde en $t_{spike}$ se midió al menos un spike en esa ventana. Los valores de $D(\tau)$ calculados se presentan en en la Fig.\ref{d_tau}. 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{../Graficos/D_tau.png}
-	\caption{La función $D(\tau)$ considerando distintos intervalos tiempo entre cada interacción.}
+	\caption{La función $D(\tau)$ }
 	\label{d_tau}
 \end{figure}
 
@@ -133,14 +132,13 @@ int N_signal  = 10001;
 
 float var_s  = 31.65;
 
-for (int i = 0; i < 1000; ++i) //Tau
+for (int i = -1000; i < 1000; ++i) //Tau
 {
  for (int j = 0; j < N; ++j) //t_spike
  	{ t_evaluate= j+i;
 	  
 	  if (t_evaluate>=0 
-	  && t_evaluate<N
-	  && vec_spikes[j]!=0) 
+	  && t_evaluate<N) 
 
 	  sum+=vec_signal[t_evaluate]*vec_spikes[j];
 	  //Suma sobre todos los spikes en esa ventana
