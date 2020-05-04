@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 import matplotlib as mpl
-mpl.rcParams.update({'font.size': 19,  'figure.figsize': [9, 6],  'figure.autolayout': True, 'font.family': 'serif', 'font.sans-serif': ['Helvetica']})
+mpl.rcParams.update({'font.size': 19,  'figure.figsize': [9, 6.5],  'figure.autolayout': True, 'font.family': 'serif', 'font.sans-serif': ['Helvetica']})
 
 colormap = plt.cm.gist_ncar
 
@@ -27,27 +27,26 @@ class Arrow3D(FancyArrowPatch):
 
 #Ejercicio 1
 ##########################################################3
-
+"""
 #Crear input de 4D con la distribución de la matriz sigma
 
 def input_ejer_1():
 
 	input_4D= np.zeros(4)
-	"""
-	matriz_sigma =[
-	[2,	1, 1, 1],
-	[1,	2, 1, 1],
-	[1,	1, 2, 1],
-	[1,	1, 1, 2]]
-
-	matriz_sigma_inv= np.array([
-	[ 4/5., -1/5., -1/5., -1/5.],
-	[-1/5.,  4/5., -1/5., -1/5.],
-	[-1/5., -1/5.,  4/5., -1/5.],
-	[-1/5., -1/5., -1/5.,  4/5.]])
-
+	
+	#matriz_sigma =[
+	#[2,	1, 1, 1],
+	#[1,	2, 1, 1],
+	#[1,	1, 2, 1],
+	#[1,	1, 1, 2]]
+	#
+	#matriz_sigma_inv= np.array([
+	#[ 4/5., -1/5., -1/5., -1/5.],
+	#[-1/5.,  4/5., -1/5., -1/5.],
+	#[-1/5., -1/5.,  4/5., -1/5.],
+	#[-1/5., -1/5., -1/5.,  4/5.]])
 	#print(np.dot(matriz_sigma_inv, matriz_sigma))
-	"""
+	
 	#La magia de hacer que tenga la distribucíón que quiera
 	matriz_eigval_square=[5, 1., 1., 1.]
 
@@ -149,14 +148,20 @@ def ejer_1():
 
 	plt.show()
 
-
+"""
 #Ejercicio 2
 ##########################################################3
 
 def input_ejer_2():
 	input_2D = np.zeros(2)
-	r= np.random.uniform(0.9, 1.1)
-	theta= np.random.uniform(0, np.pi )
+
+	unit= np.random.uniform(0., 1.)
+
+	r= np.sqrt(unit*(1.21-0.81) + 0.81)
+
+	#r= np.sqrt(np.random.uniform(0.81, 1.21))	
+
+	theta= np.pi*np.random.uniform(0, 1)
 
 	input_2D[0] = r*np.cos(theta)
 	input_2D[1] = r*np.sin(theta)
@@ -173,11 +178,13 @@ def ejer_2_evolucion(n_epochs, sigma, eta):
 	weights_10D[0]= np.arange(-0.9, 1.1, 0.2)
 	weights_10D = np.reshape(np.transpose(weights_10D), (10,2))
 
+	w_init=np.array(weights_10D, copy=True) #for plotting
+	
 	input_2D=input_ejer_2()
 	########
 	#Initial values print
-	f = open('weights_2.dat', 'w')
-	ff= open('outputs.dat', 'w')
+	f = open('weights.dat', 'w')
+	ff= open('inputs.dat', 'w')
 
 	for z in range(10):
 		f.write("{}\t{}\n ".format(weights_10D[z][0], weights_10D[z][1] ))
@@ -185,26 +192,22 @@ def ejer_2_evolucion(n_epochs, sigma, eta):
 	f.write("\n\n\n\n\n\n\n")
 	########################
 
-
 	output=np.zeros(10)
-
-	max_position_1= 0
 	max_position= 0
 
-	
 	for x in range(n_epochs):
 		ff.write("{}\t{}\n ".format(input_2D[0], input_2D[1] ))
 
 		for y in range(10):
 			output[y] = np.dot(input_2D, weights_10D[y])
 		
-		max_out = np.linalg.norm(weights_10D[4] - input_2D)
+		max_out = 10 # Resetea quien el ganador cada vez que se actualiza
+		
 		for n in range(10):
 			patron1= np.linalg.norm(weights_10D[n] - input_2D)
 			if patron1 < max_out:
 				max_position=n
 				max_out=patron1
-		pass
 
 		for z in range(10):
 			weights_10D[z][0]= weights_10D[z][0] + eta*neighbour_function(z,max_position,sigma)*(input_2D[0] - weights_10D[z][0])
@@ -214,27 +217,66 @@ def ejer_2_evolucion(n_epochs, sigma, eta):
 		input_2D=input_ejer_2()
 
 	for k in range(10):
-		f.write("{}\t{}\n ".format(weights_10D[k][0], weights_10D[k][1] ))
+		f.write("{}\t{}\n ".format(weights_10D[k][0], weights_10D[k][1]))
 		pass
 	f.write("\n\n\n\n\n\n\n")	
 	f.close()
-	pass
+
+	w_end=np.array(weights_10D, copy=True) 
+
+	return np.reshape(np.transpose(w_init), (2,10)) , np.reshape(np.transpose(w_end), (2,10)) 
 
 def ejer_2():
+
+	plt.gca().set_prop_cycle(plt.cycler('color', plt.cm.gnuplot(np.linspace(0, 1, 10))))
+
+	vec= plt.cm.gnuplot(np.linspace(0, 1, 8))
+
+	n_epochs1=100000 
+	n_epochs2=10000 
+	n_epochs3=2000
+
+
+	sigma1=0.3  #0.5 es el optimo
+
+	eta= 0.02
+	graph_name= "../Graficos/sigma{}eta{}".format("0_3","0_02")
+	title_plot="$\\sigma={}$, $\\eta={}$".format(sigma1, eta)
+
+	w_init1, w_end1= ejer_2_evolucion(n_epochs1, sigma1, eta)
+	w_init3, w_end3= ejer_2_evolucion(n_epochs3, sigma1, eta)
+
+	ang = np.arange(0, np.pi, 0.01)
+
+	x=np.cos(ang)
+	y=np.sin(ang)
+
+	plt.xlabel("x")
+	plt.ylabel("y")
 	
-	ejer_2_evolucion(2000000, 1, 0.1)
+	plt.title(title_plot)
+	plt.scatter(w_init1[0], w_init1[1],  color='black', alpha=0.5, label="Inicial")
+	plt.plot(w_init1[0], w_init1[1],  color='black', alpha=0.5)
+	
+	plt.scatter(w_end1[0], w_end1[1], marker='*', s=50, alpha=0.8 , color= vec[1], label="N={}".format(n_epochs1))
+	plt.plot(w_end1[0], w_end1[1], color= vec[1])
 
-	init_output=[0.0152030416538, -0.00884214837752, 0.0984331365616, 0.0710199881398, 0.0380696032158, 0.0975260269559, 0.038536549101, 0.0242109649504, 0.012897654721, 0.0533665983356]
-	fin_output=[0.0171729266256, -0.00986066253998, 0.569925390034, 0.0792224229837, 0.0419902274485, 0.108876534646, 0.0425649694269, 0.0272354389493, 0.0144095231746, 0.0594173667181]
+	#plt.scatter(w_end2[0], w_end2[1], marker='^', s=50, alpha=0.8 , color= vec[2], label="N={}".format(n_epochs2))
+	#plt.plot(w_end2[0], w_end2[1], color= vec[2])
+
+	plt.scatter(w_end3[0], w_end3[1], marker='s', s=50, alpha=0.8 , color= vec[4], label="N={}".format(n_epochs3))
+	plt.plot(w_end3[0], w_end3[1], color= vec[4])
 
 
-	plt.plot(init_output)
-	plt.plot(fin_output)
-	#plt.show()
+
+	plt.plot(1.1*x, 1.1*y, color='brown', alpha=0.5)
+	plt.plot(0.9*x, 0.9*y, color='brown', alpha=0.5)
+	plt.axis('equal')
+	plt.legend(loc=0, title="Pesos")
+	plt.savefig(graph_name)
+	plt.show()
 	pass
-	
 
-#main
 
 def main():
 	#ejer_1()
